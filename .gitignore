@@ -173,4 +173,6 @@ out
 .yarn/install-state.gz
 .pnp.*
 
+.eslintrc-auto-import.json
+auto-imports.d.ts
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains,macos,node
