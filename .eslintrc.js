@@ -6,10 +6,8 @@ module.exports = {
     'plugin:react-hooks/recommended', // Recommended react hooks linting configs.
     'plugin:jsx-a11y/recommended', // Turns on a11y rules for JSX.
     'plugin:@typescript-eslint/recommended', // Turns on rules from TypeScript-specific plugin.
-    '@unocss',
-    './types/.eslintrc-auto-import.json',
-    'prettier',
     'plugin:prettier/recommended', // Turns off all rules that are unnecessary or might conflict with Prettier.
+    '@unocss',
   ],
   plugins: [
     'react',
@@ -25,16 +23,6 @@ module.exports = {
     'no-use-before-define': 'off', // 禁止在 函数/类/变量 定义之前使用它们
     'prefer-const': 'off', // 此规则旨在标记使用 let 关键字声明但在初始分配后从未重新分配的变量，要求使用 const
     'no-irregular-whitespace': 'off', // 禁止不规则的空白
-    'no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^h$',
-        varsIgnorePattern: '^h$',
-      },
-    ],
-    'space-before-function-paren': 'off',
-    quotes: ['error', 'single'],
-    'comma-dangle': ['error', 'never'],
 
     // typeScript (https://typescript-eslint.io/rules)
     '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量
