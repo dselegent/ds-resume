@@ -1,5 +1,11 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import Router from '@/routers'
 
 export default function App() {
-  return <div className='text-cyan-3'>app</div>
+  return (
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  )
 }
