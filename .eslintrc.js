@@ -34,7 +34,6 @@ module.exports = {
     ],
     'space-before-function-paren': 'off',
     quotes: ['error', 'single'],
-    'comma-dangle': ['error', 'never'],
 
     // typeScript (https://typescript-eslint.io/rules)
     '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量
