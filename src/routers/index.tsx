@@ -7,7 +7,9 @@ const metaRouters: any = import.meta.glob('./modules/*.tsx', {
 })
 // * 处理路由
 export const routerArray: RouteObject[] = []
-Object.keys(metaRouters).forEach(item => routerArray.push(...metaRouters[item].default))
+Object.keys(metaRouters).forEach(key => {
+  routerArray.push(...metaRouters[key].default)
+})
 
 const rootRouter: RouteObject[] = [
   ...routerArray,
