@@ -1,11 +1,13 @@
-import { Button, Result } from 'antd'
 import React from 'react'
+import { Button, Result } from 'antd'
+import './index.css'
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate()
 
   return (
     <Result
+      className='h-full f-c-c flex-col'
       status='404'
       title='404'
       subTitle='抱歉，您访问的这个页面不存在。'

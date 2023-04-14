@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 
 /** 重置样式 */
-import '@unocss/reset/antfu.css'
+import '@/styles/normalize.css'
 /** 项目内的样式 */
 // import './index.css'
 /** 引入uno.css*/

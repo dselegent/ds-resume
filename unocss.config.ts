@@ -25,7 +25,6 @@ export default defineConfig({
   shortcuts: [
     ['wh-full', 'w-full h-full'],
     ['f-c-c', 'flex justify-center items-center'],
-    ['flex-col', 'flex flex-col'],
     ['text-ellipsis', 'truncate'],
     [
       'icon-btn',
