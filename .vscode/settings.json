@@ -2,7 +2,6 @@
   "css.validate": false,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.foldingImportsByDefault": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
