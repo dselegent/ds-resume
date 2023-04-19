@@ -25,6 +25,7 @@ export default defineConfig({
   shortcuts: [
     ['wh-full', 'w-full h-full'],
     ['f-c-c', 'flex justify-center items-center'],
+    ['f-b-c', 'flex justify-between items-center'],
     ['text-ellipsis', 'truncate'],
     [
       'icon-btn',
@@ -32,8 +33,8 @@ export default defineConfig({
     ],
   ],
   rules: [
-    [/^bc-(.+)$/, ([, color]) => ({ 'border-color': `#${color}` })],
+    [/^letter-(.+)$/, ([, size]) => ({ 'letter-spacing': `${size}px` })],
     ['card-shadow', { 'box-shadow': '0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017' }],
   ],
-  theme: { colors: { primary: 'var(--primary-color)', dark_bg: 'var(--dark-bg)' } },
+  theme: { colors: { primary: '#00c091', dark_bg: 'var(--dark-bg)', font_color: '#74a274' } },
 })

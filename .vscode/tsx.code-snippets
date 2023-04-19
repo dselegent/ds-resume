@@ -1,0 +1,16 @@
+{
+  "创建 react 组件": {
+    "prefix": "rfc",
+    "body": [
+      "import React from 'react'",
+      "",
+      "const $1: React.FC = () => {",
+      "  return <>$1</>",
+      "}",
+      "",
+      "export default $1",
+      ""
+    ],
+    "description": "创建 react 组件"
+  }
+}
