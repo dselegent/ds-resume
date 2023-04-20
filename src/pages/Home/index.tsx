@@ -4,6 +4,7 @@ const Home: React.FC = () => {
   return (
     <>
       <NavBar />
+      <ProjectIntroduce />
     </>
   )
 }

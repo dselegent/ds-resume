@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
   const [isLogin] = useBoolean(true)
 
   return (
-    <section className='h-16 w-full f-b-c px-15'>
+    <section className='fixed h-16 w-full f-b-c bg-white px-15'>
       <Link to='/' className='h-full flex items-center'>
         <img className='w-8' src={logo} alt='logo' />
         <span className="ml-3 font-['monospace'] text-2xl text-font_color letter-2">ds化简</span>
