@@ -35,6 +35,8 @@ module.exports = {
     'space-before-function-paren': 'off',
     quotes: ['error', 'single'],
     'react/jsx-no-undef': 'off', // 禁止没有定义的组件名
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
 
     // typeScript (https://typescript-eslint.io/rules)
     '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量

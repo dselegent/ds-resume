@@ -5,6 +5,7 @@ const Home: React.FC = () => {
     <>
       <NavBar />
       <ProjectIntroduce />
+      <TemplateSelect />
     </>
   )
 }
