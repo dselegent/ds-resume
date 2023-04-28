@@ -1,6 +1,6 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import { Image, Button } from 'antd'
+import { Image, Button, Avatar } from 'antd'
 
 const TemplateCard: React.FC = () => {
   // 鼠标移入显示遮罩层
@@ -12,7 +12,7 @@ const TemplateCard: React.FC = () => {
   return (
     <>
       <section
-        className='mb-10 h-110 w-75 flex basis-[fit-content] flex-col overflow-hidden rounded'
+        className='mb-10 h-110 w-75 flex basis-[fit-content] flex-col overflow-hidden rounded transition duration-300 hover:translate-y-2% hover:scale-103 hover:bg-white hover:shadow-[0_16px_22px_2px_rgba(0,37,58,.2)]'
         onMouseOver={setIsHoverTrue}
         onMouseOut={setIsHoverFalse}
         onFocus={() => void 0}
@@ -28,6 +28,7 @@ const TemplateCard: React.FC = () => {
             alt='template'
             loading='lazy'
           />
+          {/* 遮罩层 */}
           <div
             className={`bg-mask absolute inset-0 z-1 h-full w-full f-c-c rounded-t ${
               isHover ? 'opacity-100' : 'opacity-0'
@@ -43,7 +44,20 @@ const TemplateCard: React.FC = () => {
             <Button type='primary'>立即制作</Button>
           </div>
         </aside>
+        {/* 使用人数 */}
+        <aside className='w-full f-b-c flex-1 px-1.5 color-gray-400'>
+          <div className='flex items-center'>
+            <Avatar size={30}>USER</Avatar>
+            <span className='translate-x-2.5 text-sm'>瓜皮</span>
+          </div>
+          <div className='flex items-center'>
+            <i className='i-ant-design-user-outlined text-lg text-gray'></i>
+            <span className='ml-1'>6666</span>
+          </div>
+        </aside>
       </section>
+
+      {/* 图片预览 */}
       {isPreview &&
         createPortal(
           <PreviewImage closePreview={setisPreviewFalse}>
