@@ -8,6 +8,9 @@ const theme: ThemeConfig = {
     Dropdown: {
       controlItemBgHover: '#e6f9f4',
     },
+    FloatButton: {
+      colorText: '#00c091',
+    },
   },
 }
 
