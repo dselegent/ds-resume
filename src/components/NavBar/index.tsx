@@ -13,14 +13,17 @@ const items: MenuProps['items'] = [
     label: <span className='hover:text-primary'>退出登录</span>,
   },
 ]
-const NavBar: React.FC = () => {
+type NavBarPropsType = { navColor: string; fontColor: string }
+const NavBar: React.FC<NavBarPropsType> = ({ navColor, fontColor }) => {
   const [isLogin] = useBoolean(true)
 
   return (
-    <section className='fixed z-10 h-16 w-full f-b-c bg-[rgba(255,255,255,.95)] px-15'>
+    <section className={'fixed z-10 h-16 w-full f-b-c  px-15 transition-colors ' + `bg-${navColor}`}>
       <Link to='/' className='h-full flex items-center'>
-        <img className='w-8' src={logo} alt='logo' />
-        <span className="ml-3 font-['monospace'] text-2xl text-font_color letter-2">ds化简</span>
+        <img className='w-9' src={logo} alt='logo' />
+        <span className={'ml-3 font-[cursive] text-2xl font-600 letter-2 transition-colors ' + `text-${fontColor}`}>
+          ds化简
+        </span>
       </Link>
       <aside>
         {isLogin ? (
