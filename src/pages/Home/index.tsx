@@ -1,10 +1,12 @@
 import React from 'react'
+import type { TemplateSelectHandle } from './components/TemplateSelect'
+import type { CustomTemplateHandle } from './components/CustomTemplate'
 import { FloatButton } from 'antd'
 
 const Home: React.FC = () => {
+  // 页面滚动改变导航栏样式
   const [navColor, setNavColor] = useState('')
   const [fontColor, setFontColor] = useState('white')
-  // 页面滚动改变导航栏样式
   const { run: throttleHandle } = useThrottleFn(
     () => {
       if (document.documentElement.scrollTop > 0) {
@@ -28,16 +30,24 @@ const Home: React.FC = () => {
     window.removeEventListener('scroll', throttleHandle)
   })
 
+  // 点击免费制作
+  const TemplateSelectComRef = useRef<TemplateSelectHandle>(null)
+  const toTemplateSelect = () => TemplateSelectComRef.current?.toTemplateSelect?.()
+
+  // 点击自定义模板
+  const CustomTemplateComRef = useRef<CustomTemplateHandle>(null)
+  const toCustomTemplate = () => CustomTemplateComRef.current?.toCustomTemplate?.()
+
   return (
     <>
       {/* 导航栏 */}
       <NavBar navColor={navColor} fontColor={fontColor} />
       {/* 项目介绍栏 */}
-      <ProjectIntroduce />
+      <ProjectIntroduce toTemplateSelect={toTemplateSelect} toCustomTemplate={toCustomTemplate} />
       {/* 模板选择 */}
-      <TemplateSelect />
+      <TemplateSelect ref={TemplateSelectComRef} />
       {/* 自定义模板 */}
-      <CustomTemplate />
+      <CustomTemplate ref={CustomTemplateComRef} />
       {/* 回到顶部 */}
       <FloatButton.BackTop tooltip='回到顶部' />
     </>

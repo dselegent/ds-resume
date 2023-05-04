@@ -1,9 +1,24 @@
 import React from 'react'
 import { Image, Button } from 'antd'
 
-const CustomTemplate: React.FC = () => {
+export type CustomTemplateHandle = {
+  toCustomTemplate: (() => void) | undefined
+}
+
+type CustomTemplatePropsType = {}
+
+const CustomTemplate = forwardRef<CustomTemplateHandle, CustomTemplatePropsType>((props, ref) => {
+  const CustomTemplateRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => ({
+    // 滚动到该元素
+    toCustomTemplate: () =>
+      CustomTemplateRef.current?.scrollIntoView({
+        behavior: 'smooth',
+      }),
+  }))
+
   return (
-    <section className='min-h-[80vh] w-full bg-white'>
+    <section className='min-h-[80vh] w-full bg-white' ref={CustomTemplateRef}>
       <IntroduceTitle title='自定义模板 + 随心所欲' subtitle='自定义模板，随意搭配，自定义主题' />
       <aside className='box-border min-h-[60vh] f-b-c pb-10 pl-[5%] pr-[2%]'>
         <div className='f-c-c overflow-hidden rounded-2.5 shadow-[0_0_70px_rgba(175,50,50,.2)]'>
@@ -29,6 +44,6 @@ const CustomTemplate: React.FC = () => {
       </aside>
     </section>
   )
-}
+})
 
 export default CustomTemplate

@@ -1,11 +1,26 @@
 import React from 'react'
 
-const TemplateSelect: React.FC = () => {
+export type TemplateSelectHandle = {
+  toTemplateSelect: (() => void) | undefined
+}
+
+type TemplateSelectPropsType = {}
+
+const TemplateSelect = forwardRef<TemplateSelectHandle, TemplateSelectPropsType>((props, ref) => {
   /* eslint-disable */
   const [templateList, setTemplateList] = useState([...Array(8).keys()])
 
+  const templateSelectRef = useRef<HTMLDivElement>(null)
+  useImperativeHandle(ref, () => ({
+    // 滚动到该元素
+    toTemplateSelect: () =>
+      templateSelectRef.current?.scrollIntoView({
+        behavior: 'smooth',
+      }),
+  }))
+
   return (
-    <section className='flex flex-col items-center'>
+    <section className='flex flex-col items-center' ref={templateSelectRef}>
       <IntroduceTitle title='在线简历制作' subtitle='选择简历模板，点击在线制作，永久云端保存，可一键导出 ' />
       <aside className='w-[1400px] flex flex-wrap justify-between'>
         {templateList.length
@@ -22,6 +37,6 @@ const TemplateSelect: React.FC = () => {
       </aside>
     </section>
   )
-}
+})
 
 export default TemplateSelect
