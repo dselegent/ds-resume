@@ -21,7 +21,11 @@ const NavBar: React.FC<NavBarPropsType> = ({ navColor, fontColor }) => {
     <section className={'fixed z-10 h-16 w-full f-b-c  px-15 transition-colors ' + `bg-${navColor}`}>
       <Link to='/' className='h-full flex items-center'>
         <img className='w-9' src={logo} alt='logo' />
-        <span className={'ml-3 font-[cursive] text-2xl font-600 letter-2 transition-colors ' + `text-${fontColor}`}>
+        <span
+          className={
+            'ml-3 font-[cursive] text-2xl font-600 letter-2 transition-colors text-font_color ' + `text-${fontColor}`
+          }
+        >
           ds化简
         </span>
       </Link>
