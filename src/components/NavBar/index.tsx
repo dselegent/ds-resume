@@ -13,7 +13,9 @@ const items: MenuProps['items'] = [
     label: <span className='hover:text-primary'>退出登录</span>,
   },
 ]
+
 type NavBarPropsType = { navColor: string; fontColor: string }
+
 const NavBar: React.FC<NavBarPropsType> = ({ navColor, fontColor }) => {
   const [isLogin] = useBoolean(true)
 

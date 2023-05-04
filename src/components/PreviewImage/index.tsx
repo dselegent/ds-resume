@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 
 type PreviewImagePropsType = { closePreview: () => void; children: ReactNode }
+
 const PreviewImage: React.FC<PreviewImagePropsType> = ({ closePreview, children }) => {
   return (
     <section
