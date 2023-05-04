@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button, Space, Dropdown, Avatar } from 'antd'
 import type { MenuProps } from 'antd'
-import logo from '@/assets/logo.png'
 
 const items: MenuProps['items'] = [
   {
@@ -14,23 +13,38 @@ const items: MenuProps['items'] = [
   },
 ]
 
-type NavBarPropsType = { navColor: string; fontColor: string }
-
-const NavBar: React.FC<NavBarPropsType> = ({ navColor, fontColor }) => {
+const NavBar: React.FC = () => {
   const [isLogin] = useBoolean(true)
+
+  // 页面滚动改变导航栏样式
+  const [navColor, setNavColor] = useState('')
+  const [fontColor, setFontColor] = useState('white')
+  const { run: throttleHandle } = useThrottleFn(
+    () => {
+      if (document.documentElement.scrollTop > 0) {
+        setNavColor('white')
+        setFontColor('font_color')
+      } else {
+        setNavColor('')
+        setFontColor('white')
+      }
+    },
+    {
+      wait: 300,
+    }
+  )
+
+  // 监听元素滚动
+  useMount(() => {
+    window.addEventListener('scroll', throttleHandle)
+  })
+  useUnmount(() => {
+    window.removeEventListener('scroll', throttleHandle)
+  })
 
   return (
     <section className={'fixed z-10 h-16 w-full f-b-c  px-15 transition-colors ' + `bg-${navColor}`}>
-      <Link to='/' className='h-full flex items-center'>
-        <img className='w-9' src={logo} alt='logo' />
-        <span
-          className={
-            'ml-3 font-[cursive] text-2xl font-600 letter-2 transition-colors text-font_color ' + `text-${fontColor}`
-          }
-        >
-          ds化简
-        </span>
-      </Link>
+      <LogoCom fontColor={fontColor} />
       <aside>
         {isLogin ? (
           <Space size={12}>
