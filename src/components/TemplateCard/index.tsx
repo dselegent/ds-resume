@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom'
 import { Image, Button, Avatar } from 'antd'
 
 const TemplateCard: React.FC = () => {
+  const navigate = useNavigate()
+
   // 鼠标移入显示遮罩层
   const [isHover, { setTrue: setIsHoverTrue, setFalse: setIsHoverFalse }] = useBoolean(false)
 
@@ -35,13 +37,15 @@ const TemplateCard: React.FC = () => {
             } transition-opacity`}
           >
             <div
-              className='absolute right-4 top-4 z-12 h-7.5 w-7.5 f-c-c rounded bg-[rgba(0,0,0,.7)]'
+              className='absolute right-4 top-4 z-12 h-7.5 w-7.5 f-c-c cursor-pointer rounded bg-[rgba(0,0,0,.7)]'
               title='预览'
               onClick={setisPreviewTrue}
             >
-              <i className='i-ant-design-eye-outlined cursor-pointer text-xl text-white'></i>
+              <i className='i-ant-design-eye-outlined text-xl text-white'></i>
             </div>
-            <Button type='primary'>立即制作</Button>
+            <Button type='primary' onClick={() => navigate('designer')}>
+              立即制作
+            </Button>
           </div>
         </aside>
         {/* 使用人数 */}
