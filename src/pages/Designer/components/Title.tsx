@@ -1,8 +1,7 @@
 import React from 'react'
 import { Tooltip } from 'antd'
 
-/* eslint-disable */
-type TitlePropsType = { unfoldOrCollapseConfig: (status: boolean) => void }
+type TitlePropsType = { unfoldOrCollapseConfig: Function }
 
 const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapseConfig }) => {
   // 展开或收起
