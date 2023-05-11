@@ -3,7 +3,7 @@ import { Tooltip, Input } from 'antd'
 import type { InputRef } from 'antd'
 
 const DesignNav: React.FC = () => {
-  const [title, setTitle] = useState('我的简历')
+  const [title, setTitle] = useSafeState('我的简历')
 
   // 更改标题
   const titleInputRef = useRef<InputRef>(null)

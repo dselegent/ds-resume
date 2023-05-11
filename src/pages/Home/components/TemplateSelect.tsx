@@ -8,7 +8,7 @@ type TemplateSelectPropsType = {}
 
 const TemplateSelect = forwardRef<TemplateSelectHandle, TemplateSelectPropsType>((props, ref) => {
   /* eslint-disable */
-  const [templateList, setTemplateList] = useState([...Array(8).keys()])
+  const [templateList, setTemplateList] = useSafeState([...Array(8).keys()])
 
   const templateSelectRef = useRef<HTMLDivElement>(null)
   useImperativeHandle(ref, () => ({

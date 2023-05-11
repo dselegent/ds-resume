@@ -5,7 +5,7 @@ type TitlePropsType = { unfoldOrCollapseConfig: Function }
 
 const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapseConfig }) => {
   // 展开或收起
-  const [tooltipTitle, setTooltipTitle] = useState<'收起' | '展开'>('收起')
+  const [tooltipTitle, setTooltipTitle] = useSafeState<'收起' | '展开'>('收起')
   const [showCollapse, { setTrue: setShowCollapseTrue, setFalse: setShowCollapseFalse }] = useBoolean(true)
   const unfoldOrCollapse = () => {
     if (showCollapse) {

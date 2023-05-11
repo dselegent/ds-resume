@@ -37,78 +37,10 @@ const SortableItem = SortableElement<SortableElementPropsType>(
 type ModelListPropsType = { leftShowStatus: boolean }
 
 const ModelList: React.FC<ModelListPropsType> = ({ leftShowStatus }) => {
-  const [items, setItems] = useState([
+  const [items, setItems] = useSafeState([
     {
       cptTitle: '基本资料',
       icon: 'user-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
-    },
-    {
-      cptTitle: '技能特长',
-      icon: 'book-outlined',
     },
     {
       cptTitle: '技能特长',

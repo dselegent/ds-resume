@@ -17,8 +17,8 @@ const NavBar: React.FC = () => {
   const [isLogin] = useBoolean(true)
 
   // 页面滚动改变导航栏样式
-  const [navColor, setNavColor] = useState('')
-  const [fontColor, setFontColor] = useState('white')
+  const [navColor, setNavColor] = useSafeState('')
+  const [fontColor, setFontColor] = useSafeState('white')
   const { run: throttleHandle } = useThrottleFn(
     () => {
       if (document.documentElement.scrollTop > 0) {
