@@ -23,6 +23,5 @@
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "types/*.d.ts", "src/**/*.tsx", "vite.config.ts"],
-  "exclude": ["node_modules", "dist", "**/*.js"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }
