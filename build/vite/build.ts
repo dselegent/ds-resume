@@ -1,6 +1,6 @@
 import type { BuildOptions } from 'vite'
 
-export default function createBuild(viteEnv: ViteEnvType): BuildOptions {
+export default function createBuild(viteEnv: IViteEnv): BuildOptions {
   const { VITE_ENV, VITE_OUTPUT_DIR } = viteEnv
   return {
     sourcemap: VITE_ENV !== 'production', // 是否启用

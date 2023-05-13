@@ -19,7 +19,7 @@ export function isProdFn(mode: string): boolean {
 }
 
 // Read all environment variable configuration files to process.env
-export function wrapperEnv(envConf: Record<string, any>): ViteEnvType {
+export function wrapperEnv(envConf: Record<string, any>): IViteEnv {
   const ret: any = {}
 
   for (const envName of Object.keys(envConf)) {

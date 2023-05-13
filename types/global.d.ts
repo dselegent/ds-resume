@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-interface ViteEnvType {
+interface IViteEnv{
 	VITE_ENV: string;
 	VITE_OUTPUT_DIR: string;
 	VITE_PUBLIC_PATH: string;
