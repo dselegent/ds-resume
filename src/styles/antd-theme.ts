@@ -11,6 +11,9 @@ const theme: ThemeConfig = {
     FloatButton: {
       colorText: '#00c091',
     },
+    Divider: {
+      colorSplit: '#dcdfe6',
+    },
   },
 }
 
