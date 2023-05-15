@@ -1,13 +1,13 @@
 import React from 'react'
 import { Tooltip } from 'antd'
 
-type TitlePropsType = { unfoldOrCollapseConfig: Function }
+type TitlePropsType = { unfoldOrCollapse: Function }
 
-const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapseConfig }) => {
+const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapse }) => {
   // 展开或收起
   const [tooltipTitle, setTooltipTitle] = useSafeState<'收起' | '展开'>('收起')
   const [showCollapse, { setTrue: setShowCollapseTrue, setFalse: setShowCollapseFalse }] = useBoolean(true)
-  const unfoldOrCollapse = () => {
+  const handleUnfoldOrCollapse = () => {
     if (showCollapse) {
       setShowCollapseFalse()
       setTooltipTitle('展开')
@@ -15,7 +15,7 @@ const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapseConfig }) => {
       setShowCollapseTrue()
       setTooltipTitle('收起')
     }
-    unfoldOrCollapseConfig(!showCollapse)
+    unfoldOrCollapse(!showCollapse)
   }
 
   return (
@@ -28,7 +28,7 @@ const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapseConfig }) => {
           className={`i-ant-design-menu-fold-outlined  cursor-pointer text-2xl text-primary transition-transform transition-duration-500 hover:opacity-70 ${
             !showCollapse && 'rotate-180'
           }`}
-          onClick={unfoldOrCollapse}
+          onClick={handleUnfoldOrCollapse}
         ></i>
       </Tooltip>
     </section>
