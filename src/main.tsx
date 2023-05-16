@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+
 import { Provider } from 'react-redux'
 import store from '@/store'
 import { PersistGate } from 'redux-persist/integration/react'
@@ -9,6 +10,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 import '@/styles/normalize.css'
 /** 项目内的样式 */
 // import './index.css'
+// 字体文件
+import '@/assets/font/font.css'
 /** 引入uno.css*/
 import 'virtual:uno.css'
 

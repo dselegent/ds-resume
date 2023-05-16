@@ -43,21 +43,19 @@ const colorList = [
 ]
 
 type ColorPickerPropsType = {
+  color: string
   /* eslint-disable */
   getColor?: (color: string) => void
 }
 
 // 主题颜色选择组件
-const ColorPicker: React.FC<ColorPickerPropsType> = ({ getColor }) => {
+const ColorPicker: React.FC<ColorPickerPropsType> = ({ color, getColor }) => {
   const [displayColorPicker, { toggle: toggleDisplayColorPicker, setFalse: setDisplayColorPickerFalse }] =
     useBoolean(false)
 
-  // 颜色选择器颜色
-  const [color, setColor] = useSafeState('#F17013')
   // 颜色选择器颜色改变
   const changeColorPicker = (color: any) => {
     setCurentIndex(-1)
-    setColor(color.hex)
     getColor?.(color.hex)
   }
 
@@ -89,16 +87,16 @@ const ColorPicker: React.FC<ColorPickerPropsType> = ({ getColor }) => {
           </div>
         )}
       </aside>
-      {colorList.map((color, index) => (
-        <aside key={color.hex} className='h-6.5 w-7.5 f-c-c rounded-full'>
+      {colorList.map((item, index) => (
+        <aside key={item.hex} className='h-6.5 w-7.5 f-c-c rounded-full'>
           <span
             className={`h-4.5 w-4.5 cursor-pointer rounded-full ${
-              curentIndex === index && 'shadow-[0_0_10px_rgb(99,100,99)]'
+              (color === item.hex || curentIndex === index) && 'shadow-[0_0_10px_rgb(99,100,99)]'
             }`}
             style={{
-              background: color.hex,
+              background: item.hex,
             }}
-            onClick={() => changeTheme(index, color)}
+            onClick={() => changeTheme(index, item)}
           ></span>
         </aside>
       ))}
