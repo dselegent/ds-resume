@@ -42,6 +42,13 @@ const colorList = [
   },
 ]
 
+// 颜色按钮
+const ColorItem = styled.span<{
+  color: string
+}>`
+  background-color: ${props => props.color};
+`
+
 type ColorPickerPropsType = {
   color: string
   /* eslint-disable */
@@ -71,13 +78,11 @@ const ColorPicker: React.FC<ColorPickerPropsType> = ({ color, getColor }) => {
       <aside>
         <Tooltip title='自定义主题颜色' placement='bottom'>
           <div className='h-6.5 w-7.5 f-c-c rounded-full'>
-            <span
+            <ColorItem
               className='h-3.5 w-3.5 cursor-pointer rounded-full'
-              style={{
-                background: color,
-              }}
+              color={color}
               onClick={toggleDisplayColorPicker}
-            ></span>
+            />
           </div>
         </Tooltip>
         {displayColorPicker && (
@@ -89,15 +94,13 @@ const ColorPicker: React.FC<ColorPickerPropsType> = ({ color, getColor }) => {
       </aside>
       {colorList.map((item, index) => (
         <aside key={item.hex} className='h-6.5 w-7.5 f-c-c rounded-full'>
-          <span
+          <ColorItem
+            color={item.hex}
             className={`h-4.5 w-4.5 cursor-pointer rounded-full ${
               (color === item.hex || curentIndex === index) && 'shadow-[0_0_10px_rgb(99,100,99)]'
             }`}
-            style={{
-              background: item.hex,
-            }}
             onClick={() => changeTheme(index, item)}
-          ></span>
+          />
         </aside>
       ))}
     </section>
