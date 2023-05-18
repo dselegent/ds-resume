@@ -20,6 +20,8 @@
     "bin-wrapper": "npm:bin-wrapper-china"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@reduxjs/toolkit": "^1.9.3",
     "ahooks": "^3.7.6",
     "antd": "^5.4.2",

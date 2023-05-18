@@ -6,13 +6,24 @@ export default function configAutoImportPlugin() {
       /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
       /\.md$/, // .md
     ],
-    imports: ['react', 'react-router-dom', 'ahooks'],
+    imports: [
+      'react',
+      'react-router-dom',
+      'ahooks',
+      {
+        '@emotion/styled': [
+          // default imports
+          ['default', 'styled'], // import { default as styled } from '@emotion/styled',
+        ],
+      },
+    ],
     dirs: [
       'src/store/**/*',
       'src/router/**/*',
       'src/components/**/*',
       'src/pages/**/*',
       'src/options',
+      'src/material/**/*',
       'src/hooks',
       'src/utils',
     ],

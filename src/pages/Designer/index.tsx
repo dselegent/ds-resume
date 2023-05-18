@@ -13,6 +13,7 @@ const Designer: React.FC = () => {
   // 放大缩小center
   const [sizeCenter, setSizeCenter] = useSafeState(1)
   sizeCenter && ''
+
   return (
     <section className='h-screen min-w-344 w-full overflow-hidden'>
       {/* 导航栏 */}
@@ -39,7 +40,8 @@ const Designer: React.FC = () => {
         >
           <TitleConfig unfoldOrCollapseConfig={unfoldOrCollapseConfig} />
           <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
-            <GlobalStyleOptions configShowStatus={configShowStatus} />
+            {/* <GlobalStyleOptions configShowStatus={configShowStatus} /> */}
+            <BaseInfoOptions />
           </Scrollbars>
         </div>
       </aside>
