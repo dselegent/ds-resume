@@ -7,6 +7,7 @@ import createVitePlugins from './build/vite/plugins'
 import autoprefixer from 'autoprefixer'
 
 export default defineConfig(({ command, mode }) => {
+  /* eslint-disable */
   const isBuild = command === 'build' // 是否是构建 serve
   const env = loadEnv(mode, process.cwd()) // 加载env环境
   const viteEnv = wrapperEnv(env)
@@ -32,7 +33,7 @@ export default defineConfig(({ command, mode }) => {
               'ie >= 8',
               //'last 2 versions', // 所有主流浏览器最近2个版本
             ],
-            grid: true,
+            grid: false,
           }),
         ],
       },
