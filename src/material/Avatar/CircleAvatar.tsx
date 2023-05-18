@@ -6,15 +6,8 @@ const CircleAvatarBox = styled.section<{
   width: string
   height: string
 }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: ${props => props.width};
   height: ${props => props.height};
-  border: 3px solid #e5e5e5;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
 `
 
 type CircleAvatarPropsType = {
@@ -24,7 +17,11 @@ type CircleAvatarPropsType = {
 
 const CircleAvatar: React.FC<CircleAvatarPropsType> = ({ width = '115px', height = '115px' }) => {
   return (
-    <CircleAvatarBox width={width} height={height}>
+    <CircleAvatarBox
+      width={width}
+      height={height}
+      className='f-c-c cursor-pointer overflow-hidden border-3 border-gray-300 rounded-full border-solid'
+    >
       <Image
         src={defaultAvatar}
         alt='circleAvatar'

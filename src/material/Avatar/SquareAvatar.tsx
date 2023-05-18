@@ -6,15 +6,8 @@ const SquareAvatarBox = styled.section<{
   width: string
   height: string
 }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: ${props => props.width};
   height: ${props => props.height};
-  border: 3px solid #e5e5e5;
-  border-radius: 8%;
-  overflow: hidden;
-  cursor: pointer;
 `
 
 type SquareAvatarPropsType = {
@@ -24,13 +17,17 @@ type SquareAvatarPropsType = {
 
 const SquareAvatar: React.FC<SquareAvatarPropsType> = ({ width = '120px', height = '120px' }) => {
   return (
-    <SquareAvatarBox width={width} height={height}>
+    <SquareAvatarBox
+      width={width}
+      height={height}
+      className='f-c-c cursor-pointer overflow-hidden border-3 border-gray-300 rounded border-solid'
+    >
       <Image
         src={defaultAvatar}
         alt='squareAvatar'
         width='100%'
         height='100%'
-        className='rounded-[8%] object-cover'
+        className='rounded object-cover'
         preview={false}
       />
     </SquareAvatarBox>

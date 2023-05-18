@@ -6,15 +6,8 @@ const RectangleAvatarBox = styled.section<{
   width: string
   height: string
 }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: ${props => props.width};
   height: ${props => props.height};
-  border: 3px solid #e5e5e5;
-  border-radius: 8%;
-  overflow: hidden;
-  cursor: pointer;
 `
 
 type RectangleAvatarPropsType = {
@@ -24,13 +17,17 @@ type RectangleAvatarPropsType = {
 
 const RectangleAvatar: React.FC<RectangleAvatarPropsType> = ({ width = '115px', height = '145px' }) => {
   return (
-    <RectangleAvatarBox width={width} height={height}>
+    <RectangleAvatarBox
+      width={width}
+      height={height}
+      className='f-c-c cursor-pointer overflow-hidden border-3 border-gray-300 rounded border-solid'
+    >
       <Image
         src={defaultAvatar}
         alt='rectangleAvatar'
         width='100%'
         height='100%'
-        className='rounded-[8%] object-cover'
+        className='rounded object-cover'
         preview={false}
       />
     </RectangleAvatarBox>
