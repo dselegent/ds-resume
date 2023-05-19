@@ -1,12 +1,17 @@
 import React from 'react'
 import { Button, Result } from 'antd'
-import './index.css'
+
+const AntdResult = styled(Result)`
+  .ant-result-image {
+    margin: 0;
+  }
+`
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate()
 
   return (
-    <Result
+    <AntdResult
       className='h-full f-c-c flex-col'
       status='404'
       title='404'
