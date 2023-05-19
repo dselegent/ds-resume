@@ -15,7 +15,7 @@ const DesignNav: React.FC = () => {
   return (
     <section className='h-15 w-full flex bg-white shadow'>
       <aside className='w-75 flex items-center pl-10'>
-        <LogoCom fontColor='font_color' />
+        <LogoCom fontColor='#74a274' />
       </aside>
       <aside className='relative f-b-c flex-1'>
         <div className='h-full flex'>

@@ -18,15 +18,15 @@ const NavBar: React.FC = () => {
 
   // 页面滚动改变导航栏样式
   const [navColor, setNavColor] = useSafeState('')
-  const [fontColor, setFontColor] = useSafeState('white')
+  const [fontColor, setFontColor] = useSafeState('#fff')
   const { run: throttleHandle } = useThrottleFn(
     () => {
       if (document.documentElement.scrollTop > 0) {
         setNavColor('white')
-        setFontColor('font_color')
+        setFontColor('#74a274')
       } else {
         setNavColor('')
-        setFontColor('white')
+        setFontColor('#fff')
       }
     },
     {
@@ -43,7 +43,7 @@ const NavBar: React.FC = () => {
   })
 
   return (
-    <section className={'fixed z-10 h-16 w-full f-b-c  px-15 transition-colors ' + `bg-${navColor}`}>
+    <section className={'fixed z-10 h-16 w-full f-b-c px-15 transition-colors ' + `bg-${navColor}`}>
       <LogoCom fontColor={fontColor} />
       <aside>
         {isLogin ? (
