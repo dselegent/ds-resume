@@ -12,7 +12,6 @@ export default function configAutoImportPlugin() {
       'ahooks',
       {
         '@emotion/styled': [
-          // default imports
           ['default', 'styled'], // import { default as styled } from '@emotion/styled',
         ],
       },
