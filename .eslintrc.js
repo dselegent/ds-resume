@@ -6,8 +6,8 @@ module.exports = {
     'plugin:react-hooks/recommended', // Recommended react hooks linting configs.
     'plugin:jsx-a11y/recommended', // Turns on a11y rules for JSX.
     'plugin:@typescript-eslint/recommended', // Turns on rules from TypeScript-specific plugin.
-    '@unocss',
     './types/.eslintrc-auto-import.json',
+    '@unocss',
     'prettier',
     'plugin:prettier/recommended', // Turns off all rules that are unnecessary or might conflict with Prettier.
   ],
