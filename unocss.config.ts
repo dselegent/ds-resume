@@ -31,6 +31,10 @@ export default defineConfig({
       'icon-btn',
       'text-16 inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-primary !outline-none',
     ],
+    [
+      'index-see-more-btn',
+      'mr-5 h-10 w-30 cursor-pointer rounded-12 from-green-400 to-cyan-400 bg-gradient-to-r text-center text-sm leading-10 transition-opacity letter-2 hover:opacity-80',
+    ],
   ],
   rules: [
     [/^letter-(.+)$/, ([, size]) => ({ 'letter-spacing': `${size}px` })],

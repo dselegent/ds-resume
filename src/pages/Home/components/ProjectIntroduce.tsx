@@ -13,16 +13,10 @@ const ProjectIntroduce: React.FC<ProjectIntroducePropsType> = ({ toTemplateSelec
         <p className='text-lg opacity-80'>快速设计、简历主题切换，支持一键导出高清PDF。</p>
         {/* 查看更多按钮 */}
         <div className='mt-10 flex'>
-          <div
-            className='mr-5 h-10 w-30 cursor-pointer rounded-12 from-green-400 to-cyan-400 bg-gradient-to-r text-center text-sm leading-10 transition-opacity letter-2 hover:opacity-80'
-            onClick={toTemplateSelect}
-          >
+          <div className='index-see-more-btn' onClick={toTemplateSelect}>
             免费制作
           </div>
-          <div
-            className='mr-5 h-10 w-30 cursor-pointer rounded-12 from-green-400 to-cyan-400 bg-gradient-to-r text-center text-sm leading-10 transition-opacity letter-2 hover:opacity-80'
-            onClick={toCustomTemplate}
-          >
+          <div className='index-see-more-btn' onClick={toCustomTemplate}>
             自定义模板
           </div>
         </div>
