@@ -15,7 +15,7 @@ const AntdTabs = styled(Tabs)`
 `
 
 const BaseInfoOptions: React.FC = () => {
-  const baseInfoOptionsDataForm = useReactive({
+  const baseInfoOptionsStyleForm = useReactive({
     titleColor: '#fff',
     titleFontSize: '14px',
     titleFontWeight: 400,
@@ -37,7 +37,6 @@ const BaseInfoOptions: React.FC = () => {
   return (
     <AntdTabs
       type='card'
-      defaultActiveKey='kPhXXunIND'
       items={[
         {
           key: 'kPhXXunIND',
@@ -54,13 +53,13 @@ const BaseInfoOptions: React.FC = () => {
               </Form.Item>
               {/* 标题样式属性 */}
               <CommonTitleOptions
-                baseInfoOptionsDataForm={baseInfoOptionsDataForm}
+                baseInfoOptionsStyleForm={baseInfoOptionsStyleForm}
                 colorLabel='姓名字体颜色'
                 fontSizeLabel='姓名字体大小'
                 fontWeightLabel='姓名字体粗细'
               />
               {/* 公共样式属性 */}
-              <CommonOptions baseInfoOptionsDataForm={baseInfoOptionsDataForm} />
+              <CommonOptions baseInfoOptionsStyleForm={baseInfoOptionsStyleForm} />
             </Form>
           ),
         },

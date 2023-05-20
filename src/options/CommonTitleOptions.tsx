@@ -7,28 +7,28 @@ type CommonTitleOptionsPropsType = {
   colorLabel?: string
   fontSizeLabel?: string
   fontWeightLabel?: string
-  baseInfoOptionsDataForm: any
+  baseInfoOptionsStyleForm: any
 }
 
 const CommonTitleOptions: React.FC<CommonTitleOptionsPropsType> = ({
   colorLabel = '标题字体颜色',
   fontSizeLabel = '标题字体大小',
   fontWeightLabel = '标题字体粗细',
-  baseInfoOptionsDataForm,
+  baseInfoOptionsStyleForm,
 }) => {
   return (
     <>
       <Form.Item label={colorLabel}>
         <ColorPicker
-          color={baseInfoOptionsDataForm.titleColor}
-          getColor={(value: string) => (baseInfoOptionsDataForm.titleColor = value)}
+          color={baseInfoOptionsStyleForm.titleColor}
+          getColor={(value: string) => (baseInfoOptionsStyleForm.titleColor = value)}
         />
       </Form.Item>
       <Form.Item label={fontSizeLabel}>
         <Select
           size='small'
-          value={baseInfoOptionsDataForm.titleFontSize}
-          onChange={(value: string) => (baseInfoOptionsDataForm.titleFontSize = value)}
+          value={baseInfoOptionsStyleForm.titleFontSize}
+          onChange={(value: string) => (baseInfoOptionsStyleForm.titleFontSize = value)}
         >
           {fontSizeList.map((value: string, index: number) => (
             <Select.Option key={index} value={value} label={value}>
@@ -40,8 +40,8 @@ const CommonTitleOptions: React.FC<CommonTitleOptionsPropsType> = ({
       <Form.Item label={fontWeightLabel}>
         <Select
           size='small'
-          value={baseInfoOptionsDataForm.titleFontWeight}
-          onChange={(value: number) => (baseInfoOptionsDataForm.titleFontWeight = value)}
+          value={baseInfoOptionsStyleForm.titleFontWeight}
+          onChange={(value: number) => (baseInfoOptionsStyleForm.titleFontWeight = value)}
         >
           {fontWeightList.map((value: number, index: number) => (
             <Select.Option key={index} value={value} label={value}>
