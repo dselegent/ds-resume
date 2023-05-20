@@ -1,6 +1,11 @@
 import React, { ReactNode } from 'react'
 import { Tooltip, Switch } from 'antd'
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
+const CptTitle = styled.p<{
+  leftShowStatus: boolean
+}>`
+  display: ${props => (props.leftShowStatus ? 'block' : 'none')};
+`
 
 const SortableList = SortableContainer<{
   onSortEnd: Function
@@ -27,7 +32,9 @@ const SortableItem = SortableElement<SortableElementPropsType>(
             <i className={`i-ant-design-${element.icon} text-xl text-gray-400`}></i>
           </Tooltip>
         </div>
-        {leftShowStatus && <p className='ml-3 text-sm text-stone-600'> {element.cptTitle}</p>}
+        <CptTitle className='transition-base ml-3 text-sm text-stone-600' leftShowStatus={leftShowStatus}>
+          {element.cptTitle}
+        </CptTitle>
       </div>
       <Switch defaultChecked size='small' className={`${leftShowStatus ? '' : 'hidden'}`} />
     </aside>
