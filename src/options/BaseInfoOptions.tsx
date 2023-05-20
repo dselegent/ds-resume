@@ -79,7 +79,7 @@ const BaseInfoOptions: React.FC<BaseInfoOptionsPropsType> = ({ configShowStatus 
                 fontWeightLabel='姓名字体粗细'
               />
               {/* 公共样式属性 */}
-              <CommonOptions baseInfoOptionsStyleForm={baseInfoOptionsStyleForm} />
+              <CommonOptions commonOptionsStyleForm={baseInfoOptionsStyleForm} />
             </Form>
           ),
         },
