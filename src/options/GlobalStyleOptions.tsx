@@ -1,6 +1,21 @@
 import React from 'react'
+import fontSizeList from '@/dictionary/fontSizeList'
+import fontWeightList from '@/dictionary/fontWeightList'
 import { Form, Select, Divider, Switch, Slider, InputNumber } from 'antd'
 import type { SelectProps } from 'antd'
+
+const AntdSlider = styled(Slider)<{
+  countModel: boolean
+}>`
+  display: ${props => (props.countModel ? 'none' : 'block')};
+  margin-top: 10px;
+`
+const AntdInputNumber = styled(InputNumber)<{
+  countModel: boolean
+}>`
+  display: ${props => (props.countModel ? 'block' : 'none')};
+  width: 100%;
+`
 
 // 字体列表
 const fontFamilyList: SelectProps['options'] = [
@@ -36,39 +51,6 @@ const fontFamilyList: SelectProps['options'] = [
   },
 ]
 
-// 字体大小列表
-const fontSizeList = [
-  '10px',
-  '12px',
-  '14px',
-  '16px',
-  '18px',
-  '20px',
-  '22px',
-  '24px',
-  '26px',
-  '28px',
-  '30px',
-  '32px',
-  '34px',
-  '36px',
-  '38px',
-  '40px',
-  '42px',
-  '44px',
-  '46px',
-  '48px',
-  '50px',
-  '52px',
-  '54px',
-  '56px',
-  '58px',
-  '60px',
-]
-
-// 字体粗细列表
-const fontWeightList = [100, 200, 100, 400, 500, 600, 700, 800, 900]
-
 type GlobalStyleOptionsType = {
   configShowStatus: boolean
 }
@@ -92,12 +74,6 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
     paddingTop: 0,
     paddingBottom: 30,
     paddingX: 50,
-    get sliderStatus() {
-      return this.countModel ? 'display-none' : ''
-    },
-    get countStatus() {
-      return !this.countModel ? 'display-none' : ''
-    },
   })
 
   return (
@@ -205,75 +181,75 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
           />
         </Form.Item>
         <Form.Item label='模块上外边距'>
-          <Slider
-            className={`my-2.5 ${globalStyleOptionsForm.sliderStatus}`}
+          <AntdSlider
+            countModel={globalStyleOptionsForm.countModel}
             value={globalStyleOptionsForm.marginTop}
             onChange={(value: number) => (globalStyleOptionsForm.marginTop = value)}
             max={100}
             min={-100}
           />
-          <InputNumber
-            className={`w-full ${globalStyleOptionsForm.countStatus}`}
+          <AntdInputNumber
+            countModel={globalStyleOptionsForm.countModel}
             size='small'
             value={globalStyleOptionsForm.marginTop}
             onChange={(value: any) => (globalStyleOptionsForm.marginTop = value)}
           />
         </Form.Item>
         <Form.Item label='模块下外边距'>
-          <Slider
-            className={`my-2.5 ${globalStyleOptionsForm.sliderStatus}`}
+          <AntdSlider
+            countModel={globalStyleOptionsForm.countModel}
             value={globalStyleOptionsForm.marginBottom}
             onChange={(value: number) => (globalStyleOptionsForm.marginBottom = value)}
             max={100}
             min={-100}
           />
-          <InputNumber
-            className={`w-full ${globalStyleOptionsForm.countStatus}`}
+          <AntdInputNumber
+            countModel={globalStyleOptionsForm.countModel}
             size='small'
             value={globalStyleOptionsForm.marginBottom}
             onChange={(value: any) => (globalStyleOptionsForm.marginBottom = value)}
           />
         </Form.Item>
         <Form.Item label='模块上内边距'>
-          <Slider
-            className={`my-2.5 ${globalStyleOptionsForm.sliderStatus}`}
+          <AntdSlider
+            countModel={globalStyleOptionsForm.countModel}
             value={globalStyleOptionsForm.paddingTop}
             onChange={(value: number) => (globalStyleOptionsForm.paddingTop = value)}
             max={100}
             min={-100}
           />
-          <InputNumber
-            className={`w-full ${globalStyleOptionsForm.countStatus}`}
+          <AntdInputNumber
+            countModel={globalStyleOptionsForm.countModel}
             size='small'
             value={globalStyleOptionsForm.paddingTop}
             onChange={(value: any) => (globalStyleOptionsForm.paddingTop = value)}
           />
         </Form.Item>
         <Form.Item label='模块下内边距'>
-          <Slider
-            className={`my-2.5 ${globalStyleOptionsForm.sliderStatus}`}
+          <AntdSlider
+            countModel={globalStyleOptionsForm.countModel}
             value={globalStyleOptionsForm.paddingBottom}
             onChange={(value: number) => (globalStyleOptionsForm.paddingBottom = value)}
             max={100}
             min={-100}
           />
-          <InputNumber
-            className={`w-full ${globalStyleOptionsForm.countStatus}`}
+          <AntdInputNumber
+            countModel={globalStyleOptionsForm.countModel}
             size='small'
             value={globalStyleOptionsForm.paddingBottom}
             onChange={(value: any) => (globalStyleOptionsForm.paddingBottom = value)}
           />
         </Form.Item>
         <Form.Item label='模块左右内边距'>
-          <Slider
-            className={`my-2.5 ${globalStyleOptionsForm.sliderStatus}`}
+          <AntdSlider
+            countModel={globalStyleOptionsForm.countModel}
             value={globalStyleOptionsForm.paddingX}
             onChange={(value: number) => (globalStyleOptionsForm.paddingX = value)}
             max={100}
             min={-100}
           />
-          <InputNumber
-            className={`w-full ${globalStyleOptionsForm.countStatus}`}
+          <AntdInputNumber
+            countModel={globalStyleOptionsForm.countModel}
             size='small'
             value={globalStyleOptionsForm.paddingX}
             onChange={(value: any) => (globalStyleOptionsForm.paddingX = value)}
