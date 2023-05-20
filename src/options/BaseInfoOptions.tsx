@@ -2,13 +2,6 @@ import React from 'react'
 import { Tabs, Form } from 'antd'
 
 const AntdTabs = styled(Tabs)`
-  .ant-tabs-nav-list {
-    width: 100%;
-  }
-  .ant-tabs-tab {
-    flex: 1;
-    justify-content: center;
-  }
   .ant-tabs-content {
     padding: 20px;
   }
@@ -37,6 +30,7 @@ const BaseInfoOptions: React.FC = () => {
   return (
     <AntdTabs
       type='card'
+      centered
       items={[
         {
           key: 'kPhXXunIND',
