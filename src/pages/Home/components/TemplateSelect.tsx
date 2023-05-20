@@ -20,7 +20,7 @@ const TemplateSelect = forwardRef<TemplateSelectHandle, TemplateSelectPropsType>
   }))
 
   return (
-    <section className='flex flex-col items-center' ref={templateSelectRef}>
+    <section className='flex-col items-center' ref={templateSelectRef}>
       <IntroduceTitle title='在线简历制作' subtitle='选择简历模板，点击在线制作，永久云端保存，可一键导出 ' />
       <aside className='w-[1400px] flex flex-wrap justify-between'>
         {templateList.length

@@ -24,7 +24,7 @@ const TitleConfig: React.FC<TitleConfigPropsType> = ({ unfoldOrCollapseConfig })
     >
       <Tooltip title={tooltipTitle} placement='bottom'>
         <i
-          className={`i-ant-design-menu-fold-outlined  cursor-pointer text-2xl text-primary transition-transform transition-duration-500 hover:opacity-70 ${
+          className={`i-ant-design-menu-fold-outlined  cursor-pointer text-2xl text-primary transition-base duration-500 hover:opacity-70 ${
             showCollapse && 'rotate-180'
           }`}
           onClick={unfoldOrCollapse}

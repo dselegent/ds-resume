@@ -25,7 +25,7 @@ const Title: React.FC<TitlePropsType> = ({ unfoldOrCollapse }) => {
       {showCollapse && <h1 className='h-15 text-sm font-700 lh-15 text-stone-700 letter-3'>模块选择</h1>}
       <Tooltip title={tooltipTitle} placement='bottom'>
         <i
-          className={`i-ant-design-menu-fold-outlined  cursor-pointer text-2xl text-primary transition-transform transition-duration-500 hover:opacity-70 ${
+          className={`i-ant-design-menu-fold-outlined  cursor-pointer text-2xl text-primary transition-base duration-500 hover:opacity-70 ${
             !showCollapse && 'rotate-180'
           }`}
           onClick={handleUnfoldOrCollapse}

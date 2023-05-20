@@ -14,7 +14,7 @@ const TemplateCard: React.FC = () => {
   return (
     <>
       <section
-        className='mb-10 h-110 w-75 flex basis-[fit-content] flex-col overflow-hidden rounded transition duration-300 hover:translate-y-2% hover:scale-103 hover:bg-white hover:shadow-[0_16px_22px_2px_rgba(0,37,58,.2)]'
+        className='transition-base mb-10 h-110 w-75 flex basis-[fit-content] flex-col overflow-hidden rounded hover:translate-y-2% hover:scale-103 hover:bg-white hover:shadow-[0_16px_22px_2px_rgba(0,37,58,.2)]'
         onMouseOver={setIsHoverTrue}
         onMouseOut={setIsHoverFalse}
         onFocus={() => void 0}
@@ -34,7 +34,7 @@ const TemplateCard: React.FC = () => {
           <div
             className={`bg-mask absolute inset-0 z-1 h-full w-full f-c-c rounded-t ${
               isHover ? 'opacity-100' : 'opacity-0'
-            } transition-opacity`}
+            } transition-base`}
           >
             <div
               className='absolute right-4 top-4 z-12 h-7.5 w-7.5 f-c-c cursor-pointer rounded bg-[rgba(0,0,0,.7)]'

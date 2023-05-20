@@ -43,7 +43,7 @@ const NavBar: React.FC = () => {
   })
 
   return (
-    <section className={'fixed z-10 h-16 w-full f-b-c px-15 transition-colors ' + `bg-${navColor}`}>
+    <section className={'fixed z-10 h-16 w-full f-b-c px-15 transition-base ' + `bg-${navColor}`}>
       <LogoCom fontColor={fontColor} />
       <aside>
         {isLogin ? (

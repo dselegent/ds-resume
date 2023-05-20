@@ -6,7 +6,7 @@ const SortableList = SortableContainer<{
   onSortEnd: Function
   children: ReactNode
 }>(({ children }: { children: ReactNode }) => {
-  return <section className='w-full flex flex-col'>{children}</section>
+  return <section className='w-full flex-col'>{children}</section>
 })
 
 type SortableElementPropsType = {

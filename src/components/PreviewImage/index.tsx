@@ -5,7 +5,7 @@ type PreviewImagePropsType = { closePreview: () => void; children: ReactNode }
 const PreviewImage: React.FC<PreviewImagePropsType> = ({ closePreview, children }) => {
   return (
     <section
-      className='fixed inset-0 z-100 h-screen w-screen flex justify-center bg-mask pt-10 transition-colors'
+      className='transition-base fixed inset-0 z-100 h-screen w-screen flex justify-center bg-mask pt-10'
       onClick={closePreview}
     >
       <div onClick={e => e.stopPropagation()}>{children}</div>

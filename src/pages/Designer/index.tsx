@@ -21,7 +21,7 @@ const Designer: React.FC = () => {
       {/* 内容区域 */}
       <aside className='w-full flex'>
         {/* 左侧添加模块区域 */}
-        <div className={`transition-all h-[calc(100vh-60px)]  bg-white ${leftShowStatus ? 'w-67.5' : 'w-17.5'}`}>
+        <div className={`transition-base h-[calc(100vh-60px)]  bg-white ${leftShowStatus ? 'w-67.5' : 'w-17.5'}`}>
           <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
             <Title unfoldOrCollapse={unfoldOrCollapse} />
             <ModelList leftShowStatus={leftShowStatus} />
@@ -34,7 +34,7 @@ const Designer: React.FC = () => {
         </div>
         {/* 属性设置面板 */}
         <div
-          className={`transition-all h-[calc(100vh-60px)] flex flex-col  bg-white ${
+          className={`transition-base h-[calc(100vh-60px)] flex-col  bg-white ${
             configShowStatus ? 'w-[597px]' : 'w-[355px]'
           }`}
         >
