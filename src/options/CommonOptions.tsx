@@ -17,23 +17,23 @@ const AntdInputNumber = styled(InputNumber)<{
 `
 
 type CommonOptionsPropsType = {
-  baseInfoOptionsStyleForm: any
+  commonOptionsStyleForm: any
 }
 
-const CommonOptions: React.FC<CommonOptionsPropsType> = ({ baseInfoOptionsStyleForm }) => {
+const CommonOptions: React.FC<CommonOptionsPropsType> = ({ commonOptionsStyleForm }) => {
   return (
     <>
       <Form.Item label='字体颜色'>
         <ColorPicker
-          color={baseInfoOptionsStyleForm.textColor}
-          getColor={(value: string) => (baseInfoOptionsStyleForm.textColor = value)}
+          color={commonOptionsStyleForm.textColor}
+          getColor={(value: string) => (commonOptionsStyleForm.textColor = value)}
         />
       </Form.Item>
       <Form.Item label='字体大小'>
         <Select
           size='small'
-          value={baseInfoOptionsStyleForm.textFontSize}
-          onChange={(value: string) => (baseInfoOptionsStyleForm.textFontSize = value)}
+          value={commonOptionsStyleForm.textFontSize}
+          onChange={(value: string) => (commonOptionsStyleForm.textFontSize = value)}
         >
           {fontSizeList.map((value: string, index: number) => (
             <Select.Option key={index} value={value} label={value}>
@@ -45,8 +45,8 @@ const CommonOptions: React.FC<CommonOptionsPropsType> = ({ baseInfoOptionsStyleF
       <Form.Item label='字体粗细'>
         <Select
           size='small'
-          value={baseInfoOptionsStyleForm.textFontWeight}
-          onChange={(value: number) => (baseInfoOptionsStyleForm.textFontWeight = value)}
+          value={commonOptionsStyleForm.textFontWeight}
+          onChange={(value: number) => (commonOptionsStyleForm.textFontWeight = value)}
         >
           {fontWeightList.map((value: number, index: number) => (
             <Select.Option key={index} value={value} label={value}>
@@ -61,83 +61,83 @@ const CommonOptions: React.FC<CommonOptionsPropsType> = ({ baseInfoOptionsStyleF
       <Form.Item label='计数器模式'>
         <Switch
           size='small'
-          onChange={(value: boolean) => (baseInfoOptionsStyleForm.countModel = value)}
-          checked={baseInfoOptionsStyleForm.countModel}
+          onChange={(value: boolean) => (commonOptionsStyleForm.countModel = value)}
+          checked={commonOptionsStyleForm.countModel}
         />
       </Form.Item>
       <Form.Item label='上外边距'>
         <AntdSlider
-          countModel={baseInfoOptionsStyleForm.countModel}
-          value={baseInfoOptionsStyleForm.marginTop}
-          onChange={(value: number) => (baseInfoOptionsStyleForm.marginTop = value)}
+          countModel={commonOptionsStyleForm.countModel}
+          value={commonOptionsStyleForm.marginTop}
+          onChange={(value: number) => (commonOptionsStyleForm.marginTop = value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={baseInfoOptionsStyleForm.countModel}
+          countModel={commonOptionsStyleForm.countModel}
           size='small'
-          value={baseInfoOptionsStyleForm.marginTop}
-          onChange={(value: any) => (baseInfoOptionsStyleForm.marginTop = value)}
+          value={commonOptionsStyleForm.marginTop}
+          onChange={(value: any) => (commonOptionsStyleForm.marginTop = value)}
         />
       </Form.Item>
       <Form.Item label='下外边距'>
         <AntdSlider
-          countModel={baseInfoOptionsStyleForm.countModel}
-          value={baseInfoOptionsStyleForm.marginBottom}
-          onChange={(value: number) => (baseInfoOptionsStyleForm.marginBottom = value)}
+          countModel={commonOptionsStyleForm.countModel}
+          value={commonOptionsStyleForm.marginBottom}
+          onChange={(value: number) => (commonOptionsStyleForm.marginBottom = value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={baseInfoOptionsStyleForm.countModel}
+          countModel={commonOptionsStyleForm.countModel}
           size='small'
-          value={baseInfoOptionsStyleForm.marginBottom}
-          onChange={(value: any) => (baseInfoOptionsStyleForm.marginBottom = value)}
+          value={commonOptionsStyleForm.marginBottom}
+          onChange={(value: any) => (commonOptionsStyleForm.marginBottom = value)}
         />
       </Form.Item>
       <Form.Item label='上内边距'>
         <AntdSlider
-          countModel={baseInfoOptionsStyleForm.countModel}
-          value={baseInfoOptionsStyleForm.paddingTop}
-          onChange={(value: number) => (baseInfoOptionsStyleForm.paddingTop = value)}
+          countModel={commonOptionsStyleForm.countModel}
+          value={commonOptionsStyleForm.paddingTop}
+          onChange={(value: number) => (commonOptionsStyleForm.paddingTop = value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={baseInfoOptionsStyleForm.countModel}
+          countModel={commonOptionsStyleForm.countModel}
           size='small'
-          value={baseInfoOptionsStyleForm.paddingTop}
-          onChange={(value: any) => (baseInfoOptionsStyleForm.paddingTop = value)}
+          value={commonOptionsStyleForm.paddingTop}
+          onChange={(value: any) => (commonOptionsStyleForm.paddingTop = value)}
         />
       </Form.Item>
       <Form.Item label='下内边距'>
         <AntdSlider
-          countModel={baseInfoOptionsStyleForm.countModel}
-          value={baseInfoOptionsStyleForm.paddingBottom}
-          onChange={(value: number) => (baseInfoOptionsStyleForm.paddingBottom = value)}
+          countModel={commonOptionsStyleForm.countModel}
+          value={commonOptionsStyleForm.paddingBottom}
+          onChange={(value: number) => (commonOptionsStyleForm.paddingBottom = value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={baseInfoOptionsStyleForm.countModel}
+          countModel={commonOptionsStyleForm.countModel}
           size='small'
-          value={baseInfoOptionsStyleForm.paddingBottom}
-          onChange={(value: any) => (baseInfoOptionsStyleForm.paddingBottom = value)}
+          value={commonOptionsStyleForm.paddingBottom}
+          onChange={(value: any) => (commonOptionsStyleForm.paddingBottom = value)}
         />
       </Form.Item>
       <Form.Item label='左右内边距'>
         <AntdSlider
-          countModel={baseInfoOptionsStyleForm.countModel}
-          value={baseInfoOptionsStyleForm.paddingX}
-          onChange={(value: number) => (baseInfoOptionsStyleForm.paddingX = value)}
+          countModel={commonOptionsStyleForm.countModel}
+          value={commonOptionsStyleForm.paddingX}
+          onChange={(value: number) => (commonOptionsStyleForm.paddingX = value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={baseInfoOptionsStyleForm.countModel}
+          countModel={commonOptionsStyleForm.countModel}
           size='small'
-          value={baseInfoOptionsStyleForm.paddingX}
-          onChange={(value: any) => (baseInfoOptionsStyleForm.paddingX = value)}
+          value={commonOptionsStyleForm.paddingX}
+          onChange={(value: any) => (commonOptionsStyleForm.paddingX = value)}
         />
       </Form.Item>
     </>
