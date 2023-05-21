@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Space, Switch, DatePicker } from 'antd'
-import locale from 'antd/es/date-picker/locale/zh_CN'
 import dayjs from 'dayjs/esm'
 
 const AntdSpace = styled(Space)`
@@ -8,6 +7,10 @@ const AntdSpace = styled(Space)`
   .ant-space-item:first-of-type {
     flex: 1;
   }
+`
+
+const AntdDatePickerRangePicker = styled(DatePicker.RangePicker)`
+  width: 100%;
 `
 
 const dateFormat = 'YYYY-MM'
@@ -23,8 +26,7 @@ const DateFormItem: React.FC<DateFormItemPropsType> = ({ item, isShow }) => {
   return (
     <Form.Item label='日期选择'>
       <AntdSpace>
-        <DatePicker.RangePicker
-          locale={locale}
+        <AntdDatePickerRangePicker
           picker='month'
           size='small'
           value={[dayjs(item.date[0], dateFormat), dayjs(item.date[1], dateFormat)]}
