@@ -73,7 +73,7 @@ const BaseInfoOptions: React.FC<BaseInfoOptionsPropsType> = ({ configShowStatus 
               </Form.Item>
               {/* 标题样式属性 */}
               <CommonTitleOptions
-                baseInfoOptionsStyleForm={baseInfoOptionsStyleForm}
+                commonTitleOptionsStyleForm={baseInfoOptionsStyleForm}
                 colorLabel='姓名字体颜色'
                 fontSizeLabel='姓名字体大小'
                 fontWeightLabel='姓名字体粗细'
