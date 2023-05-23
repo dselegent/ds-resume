@@ -27,6 +27,7 @@ const DateFormItem: React.FC<DateFormItemPropsType> = ({ item, isShow }) => {
     <Form.Item label='日期选择'>
       <AntdSpace>
         <AntdDatePickerRangePicker
+          allowClear={false}
           picker='month'
           size='small'
           value={[dayjs(item.date[0], dateFormat), dayjs(item.date[1], dateFormat)]}
