@@ -39,7 +39,7 @@ const HobbiesOptions: React.FC<HobbiesOptionsPropsType> = ({ configShowStatus })
       centered
       items={[
         {
-          key: 'KPzq6FjVaR',
+          key: 'BHbsV4VXpP',
           label: '样式设置',
           children: (
             <Form
@@ -54,7 +54,7 @@ const HobbiesOptions: React.FC<HobbiesOptionsPropsType> = ({ configShowStatus })
           ),
         },
         {
-          key: 'q1B68YOEwi',
+          key: 'TvJLIAOPUg',
           label: '数据配置',
           children: (
             <Form
