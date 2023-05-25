@@ -10,6 +10,7 @@ specifiers:
   '@emotion/styled': ^11.11.0
   '@iconify-json/ant-design': ^1.1.5
   '@reduxjs/toolkit': ^1.9.3
+  '@types/lodash-es': ^4.17.7
   '@types/node': ^18.0.0
   '@types/react': ^18.0.14
   '@types/react-color': ^3.0.6
@@ -37,6 +38,7 @@ specifiers:
   eslint-plugin-simple-import-sort: ^7.0.0
   husky: ^8.0.1
   lint-staged: ^13.0.2
+  lodash-es: ^4.17.21
   prettier: ^2.7.1
   react: ^18.2.0
   react-color: ^2.19.3
@@ -61,6 +63,7 @@ dependencies:
   ahooks: 3.7.6_react@18.2.0
   antd: 5.4.2_biqbaboplfbrettd7655fr4n2y
   dayjs: 1.11.7
+  lodash-es: 4.17.21
   react: 18.2.0
   react-color: 2.19.3_react@18.2.0
   react-custom-scrollbars-2: 4.5.0_biqbaboplfbrettd7655fr4n2y
@@ -74,6 +77,7 @@ devDependencies:
   '@commitlint/cli': 17.5.1
   '@commitlint/config-conventional': 17.4.4
   '@iconify-json/ant-design': 1.1.5
+  '@types/lodash-es': 4.17.7
   '@types/node': 18.15.11
   '@types/react': 18.0.33
   '@types/react-color': 3.0.6
@@ -1187,6 +1191,16 @@ packages:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
       '@types/node': 18.15.11
+    dev: true
+
+  /@types/lodash-es/4.17.7:
+    resolution: {integrity: sha512-z0ptr6UI10VlU6l5MYhGwS4mC8DZyYer2mCoyysZtSF7p26zOX8UpbrV0YpNYLGS8K4PUFIyEr62IMFFjveSiQ==}
+    dependencies:
+      '@types/lodash': 4.14.194
+    dev: true
+
+  /@types/lodash/4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
     dev: true
 
   /@types/minimatch/5.1.2:
