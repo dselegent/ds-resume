@@ -3,16 +3,17 @@ import IMODELDATAJSON from '@/interface/modelData'
 const MODEL_DATA_JSON: IMODELDATAJSON = {
   RESUME_TITLE: {
     model: 'RESUME_TITLE',
-    show: true,
+    show: false,
     title: '我的简历',
   },
   BASE_INFO: {
+    iconfont: 'ant-design-user-outlined',
     model: 'BASE_INFO',
     show: true,
     title: '基本资料',
-    name: '小猪课堂',
-    age: 25,
-    address: '四川成都', // 所在地址
+    name: '李瓜皮',
+    age: 21,
+    address: '湖南长沙', // 所在地址
     avatar: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', // 头像地址
     workService: 3, // 工作年限
     phoneNumber: '028-1234321', // 联系电话
@@ -31,13 +32,13 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   JOB_INTENTION: {
-    iconfont: 'icon-yixianggangwei',
+    iconfont: 'ant-design-usergroup-add-outlined',
     model: 'JOB_INTENTION',
     show: true,
     title: '求职意向',
     intendedPositions: '前端开发工程师', // 意向岗位
-    intendedCity: '成都', // 意向城市
-    expectSalary: '8000-10000', // 期望薪资
+    intendedCity: '长沙', // 意向城市
+    expectSalary: '4000-6000', // 期望薪资
     jobStatus: '随时入职', // 求职状态
     jobSearchType: '求职类型',
     isShow: {
