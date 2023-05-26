@@ -1,7 +1,34 @@
 import React from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2'
+import IDESIGNJSON from '@/interface/design'
+import MODEL_DATA_JSON from '@/schema/modelData'
 
 const Designer: React.FC = () => {
+  const dispatch = useAppDispatch()
+  // 选中的模块数据
+  const selectMaterial = useAppSelector(selectorSelectMaterial)
+  // 简历数据
+  const resumeJsonData = useAppSelector(selectorResumeJsonData)
+
+  let id = '1'
+  let name = 'template1'
+  // 重置数据方法
+  const resetStoreAndLocal = async () => {
+    let TEMPLATE_JSON
+    const url = `${location.origin}/json/${name}.json`
+    const data: IDESIGNJSON = await fetch(url).then(res => res.json())
+    TEMPLATE_JSON = data
+    TEMPLATE_JSON.ID = id
+    TEMPLATE_JSON.NAME = name
+    TEMPLATE_JSON.COMPONENTS.forEach(item => {
+      item.data = MODEL_DATA_JSON[item.model]
+    })
+    dispatch(changeResumeJsonData(TEMPLATE_JSON)) // 更改store的数据
+    console.log('简历JSON数据', resumeJsonData)
+  }
+  // 获取本地数据
+  if (!resumeJsonData.ID) resetStoreAndLocal()
+
   // 展开或收起左侧栏
   const [leftShowStatus, { setTrue: setLeftShowStatusTrue, setFalse: setLeftShowStatusFalse }] = useBoolean(true)
   const unfoldOrCollapse = (status: boolean) => (status ? setLeftShowStatusTrue() : setLeftShowStatusFalse())
@@ -38,10 +65,20 @@ const Designer: React.FC = () => {
             configShowStatus ? 'w-[597px]' : 'w-[355px]'
           }`}
         >
-          <TitleConfig unfoldOrCollapseConfig={unfoldOrCollapseConfig} />
+          <TitleConfig title={selectMaterial.cptTitle} unfoldOrCollapseConfig={unfoldOrCollapseConfig} />
           <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
-            {/* <GlobalStyleOptions configShowStatus={configShowStatus} /> */}
-            <BaseInfoOptions />
+            <GlobalStyleOptions configShowStatus={configShowStatus} />
+            {/* <BaseInfoOptions configShowStatus={configShowStatus} /> */}
+            {/* <JobIntentionOptions configShowStatus={configShowStatus} /> */}
+            {/* <EduBackgroundOptions configShowStatus={configShowStatus} /> */}
+            {/* <SkillSpecialtiesOptions configShowStatus={configShowStatus} /> */}
+            {/* <CampusExperienceOptions configShowStatus={configShowStatus} /> */}
+            {/* <WorkExperienceOptions configShowStatus={configShowStatus} /> */}
+            {/* <ProjectExperienceOptions configShowStatus={configShowStatus} /> */}
+            {/* <AwardsOptions configShowStatus={configShowStatus} /> */}
+            {/* <HobbiesOptions configShowStatus={configShowStatus} /> */}
+            {/* <SelfEvaluationOptions configShowStatus={configShowStatus} /> */}
+            {/* <WorksDisplayOptions configShowStatus={configShowStatus} /> */}
           </Scrollbars>
         </div>
       </aside>

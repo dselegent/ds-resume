@@ -33,6 +33,23 @@ const resumeJsonSlice = createSlice({
       let { key, value } = payload
       state.resumeJsonData.GLOBAL_STYLE[key] = value
     },
+    // 改变模块排序
+    changeResumeJsonComponentSort(state, { payload }: PayloadAction<Array<IMATERIALITEM | any>>) {
+      state.resumeJsonData.COMPONENTS = payload
+    },
+    // 改变模块显示隐藏
+    changeResumeJsonComponentShow(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        index: number
+        show: boolean
+      }>
+    ) {
+      let { index, show } = payload
+      state.resumeJsonData.COMPONENTS[index].show = show
+    },
     // 新增组件
     pushComponent(state, { payload }: PayloadAction<IMATERIALITEM>) {
       state.resumeJsonData.COMPONENTS.push(payload)
@@ -47,8 +64,10 @@ const resumeJsonSlice = createSlice({
 export const selectorResumeJsonData = (state: RootState) => state.resumeJson.resumeJsonData
 
 export const changeResumeJsonData = resumeJsonSlice.actions.changeResumeJsonData
-export const resetResumeJson = resumeJsonSlice.actions.resetResumeJson
 export const changeResumeJsonGlobalStyleData = resumeJsonSlice.actions.changeResumeJsonGlobalStyleData
+export const changeResumeJsonComponentSort = resumeJsonSlice.actions.changeResumeJsonComponentSort
+export const changeResumeJsonComponentShow = resumeJsonSlice.actions.changeResumeJsonComponentShow
+export const resetResumeJson = resumeJsonSlice.actions.resetResumeJson
 
 export const resumeJson = resumeJsonSlice.reducer
 
@@ -83,7 +102,7 @@ const selectMaterialSlice = createSlice({
     },
   },
 })
-export const selectorCptTitle = (state: RootState) => state.selectMaterial.cptTitle
+export const selectorSelectMaterial = (state: RootState) => state.selectMaterial
 
 export const updateSelectModel = selectMaterialSlice.actions.updateSelectModel
 export const resetSelectModel = selectMaterialSlice.actions.resetSelectModel
