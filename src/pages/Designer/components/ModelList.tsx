@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react'
 import type { IMATERIALITEM } from '@/interface/material'
 import { Tooltip, Switch } from 'antd'
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { arrayMoveImmutable } from 'array-move'
 
 const CptTitle = styled.p<{
   leftShowStatus: boolean
@@ -17,12 +18,13 @@ const SortableList = SortableContainer<{
 })
 
 type SortableElementPropsType = {
-  element: IMATERIALITEM & { index: number }
+  sortIndex: number
+  element: IMATERIALITEM
   leftShowStatus: boolean
 }
 
 const SortableItem = SortableElement<SortableElementPropsType>(
-  ({ element, leftShowStatus }: SortableElementPropsType) => {
+  ({ sortIndex, element, leftShowStatus }: SortableElementPropsType) => {
     const dispatch = useAppDispatch()
     // 选中的模块数据
     const selectMaterial = useAppSelector(selectorSelectMaterial)
@@ -50,7 +52,7 @@ const SortableItem = SortableElement<SortableElementPropsType>(
         onClick={() => selectModel(element)}
       >
         <div className='flex items-center'>
-          <div className='h-7 w-7 f-c-c border border-gray-400 rounded-full border-solid'>
+          <div className='h-7 w-7 f-c-c cursor-pointer border border-gray-400 rounded-full border-solid'>
             <Tooltip title={!leftShowStatus && element.data.title} placement='right'>
               <i className={`i-${element.data.iconfont} text-xl text-gray-400`}></i>
             </Tooltip>
@@ -69,7 +71,7 @@ const SortableItem = SortableElement<SortableElementPropsType>(
           onChange={(value: boolean) =>
             dispatch(
               changeResumeJsonComponentShow({
-                index: element.index,
+                index: sortIndex,
                 show: value,
               })
             )
@@ -89,15 +91,20 @@ const ModelList: React.FC<ModelListPropsType> = ({ leftShowStatus }) => {
   const resumeJsonData = useAppSelector(selectorResumeJsonData)
 
   const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-    // setItems(items => arrayMove(resumeJsonData.COMPONENTS, oldIndex, newIndex))
-    dispatch(changeResumeJsonComponentSort(arrayMove(resumeJsonData.COMPONENTS, oldIndex, newIndex)))
+    dispatch(changeResumeJsonComponentSort(arrayMoveImmutable(resumeJsonData.COMPONENTS, oldIndex, newIndex)))
   }
 
   return (
     <SortableList onSortEnd={onSortEnd}>
       <i className='i-ant-design-book-outlined i-ant-design-usergroup-add-outlined display-none'></i>
       {resumeJsonData.COMPONENTS.map((value, index) => (
-        <SortableItem key={value.keyId} index={index} element={{ ...value, index }} leftShowStatus={leftShowStatus} />
+        <SortableItem
+          key={value.keyId}
+          index={index}
+          sortIndex={index}
+          element={value}
+          leftShowStatus={leftShowStatus}
+        />
       ))}
     </SortableList>
   )
