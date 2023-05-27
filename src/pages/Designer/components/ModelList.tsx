@@ -1,112 +1,52 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import type { IMATERIALITEM } from '@/interface/material'
-import { Tooltip, Switch } from 'antd'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
-import { arrayMoveImmutable } from 'array-move'
-
-const CptTitle = styled.p<{
-  leftShowStatus: boolean
-}>`
-  display: ${props => (props.leftShowStatus ? 'block' : 'none')};
-`
-
-const SortableList = SortableContainer<{
-  onSortEnd: Function
-  children: ReactNode
-}>(({ children }: { children: ReactNode }) => {
-  return <section className='w-full flex-col'>{children}</section>
-})
-
-type SortableElementPropsType = {
-  sortIndex: number
-  element: IMATERIALITEM
-  leftShowStatus: boolean
-}
-
-const SortableItem = SortableElement<SortableElementPropsType>(
-  ({ sortIndex, element, leftShowStatus }: SortableElementPropsType) => {
-    const dispatch = useAppDispatch()
-    // 选中的模块数据
-    const selectMaterial = useAppSelector(selectorSelectMaterial)
-
-    // 选中模块
-    const selectModel = (item: IMATERIALITEM) => {
-      let optionsName: string = item.cptOptionsName
-      let updateData = {
-        cptName: item.model,
-        cptOptionsName: optionsName,
-        cptTitle: item.data.title,
-        cptKeyId: item.keyId,
-      }
-      dispatch(updateSelectModel(updateData))
-    }
-
-    return (
-      <div
-        className={`h-15 f-b-c border border-transparent border-dashed px-3 cursor-row-resize	hover:border-primary ${
-          !leftShowStatus ? 'justify-center' : ''
-        }`}
-        style={{
-          background: selectMaterial.cptKeyId === element.keyId ? 'rgba(227, 231, 234, 0.6)' : '',
-        }}
-        onClick={() => selectModel(element)}
-      >
-        <div className='flex items-center'>
-          <div className='h-7 w-7 f-c-c cursor-pointer border border-gray-400 rounded-full border-solid'>
-            <Tooltip title={!leftShowStatus && element.data.title} placement='right'>
-              <i className={`i-${element.data.iconfont} text-xl text-gray-400`}></i>
-            </Tooltip>
-          </div>
-          <CptTitle
-            className='ml-3 cursor-pointer text-sm text-stone-600 transition-base'
-            leftShowStatus={leftShowStatus}
-          >
-            {element.data.title}
-          </CptTitle>
-        </div>
-        <Switch
-          size='small'
-          className={`${leftShowStatus ? '' : 'hidden'}`}
-          checked={element.show}
-          onChange={(value: boolean) =>
-            dispatch(
-              changeResumeJsonComponentShow({
-                index: sortIndex,
-                show: value,
-              })
-            )
-          }
-        />
-      </div>
-    )
-  }
-)
+import { DndContext } from '@dnd-kit/core'
+import type { DragEndEvent } from '@dnd-kit/core'
+import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 type ModelListPropsType = { leftShowStatus: boolean }
 
 const ModelList: React.FC<ModelListPropsType> = ({ leftShowStatus }) => {
   const dispatch = useAppDispatch()
-
   // 简历数据
   const resumeJsonData = useAppSelector(selectorResumeJsonData)
 
-  const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
-    dispatch(changeResumeJsonComponentSort(arrayMoveImmutable(resumeJsonData.COMPONENTS, oldIndex, newIndex)))
+  // 拖拽更新
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event
+
+    if (active.id !== over?.id) {
+      const datas = resumeJsonData.COMPONENTS
+      const oldIndex = datas.findIndex((item: IMATERIALITEM) => item.keyId == active.id)
+      const newIndex = datas.findIndex((item: IMATERIALITEM) => item.keyId == over?.id)
+      dispatch(changeResumeJsonComponentSort(arrayMove(datas, oldIndex, newIndex)))
+    } else {
+      let data = resumeJsonData.COMPONENTS.find((item: IMATERIALITEM) => item.keyId === active.id)
+      let updateData = {
+        cptName: data.model,
+        cptOptionsName: data.cptOptionsName,
+        cptTitle: data.data.title,
+        cptKeyId: data.keyId,
+      }
+      dispatch(updateSelectModel(updateData))
+    }
   }
 
   return (
-    <SortableList onSortEnd={onSortEnd}>
+    <DndContext onDragEnd={handleDragEnd}>
       <i className='i-ant-design-book-outlined i-ant-design-usergroup-add-outlined display-none'></i>
-      {resumeJsonData.COMPONENTS.map((value, index) => (
-        <SortableItem
-          key={value.keyId}
-          index={index}
-          sortIndex={index}
-          element={value}
-          leftShowStatus={leftShowStatus}
-        />
-      ))}
-    </SortableList>
+      <SortableContext items={resumeJsonData.COMPONENTS.map(i => i.keyId)} strategy={verticalListSortingStrategy}>
+        {resumeJsonData.COMPONENTS.map((item: IMATERIALITEM, index) => (
+          <ModelItem
+            key={item.keyId}
+            id={item.keyId}
+            sortIndex={index}
+            leftShowStatus={leftShowStatus}
+            element={item}
+          />
+        ))}
+      </SortableContext>
+    </DndContext>
   )
 }
 

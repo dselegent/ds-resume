@@ -2,6 +2,7 @@ import React from 'react'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 import IDESIGNJSON from '@/interface/design'
 import MODEL_DATA_JSON from '@/schema/modelData'
+import optionsComponents from '@/utils/registerMaterialOptionsCom'
 
 const Designer: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -28,6 +29,19 @@ const Designer: React.FC = () => {
   }
   // 获取本地数据
   if (!resumeJsonData.ID) resetStoreAndLocal()
+
+  // 内容区dom节点
+  const htmlContentPdf = useRef<HTMLDivElement>(null)
+  // 全局样式设置
+  useEventListener(
+    'click',
+    () => {
+      dispatch(resetSelectModel())
+    },
+    {
+      target: htmlContentPdf,
+    }
+  )
 
   // 展开或收起左侧栏
   const [leftShowStatus, { setTrue: setLeftShowStatusTrue, setFalse: setLeftShowStatusFalse }] = useBoolean(true)
@@ -58,6 +72,8 @@ const Designer: React.FC = () => {
         <div className='h-[calc(100vh-60px)] min-w-210 flex-1 overflow-auto'>
           {/* 放大缩小 */}
           <ZoomAndOut setSizeCenter={setSizeCenter} />
+          {/* 内容区域 */}
+          <div ref={htmlContentPdf}>content</div>
         </div>
         {/* 属性设置面板 */}
         <div
@@ -67,18 +83,14 @@ const Designer: React.FC = () => {
         >
           <TitleConfig title={selectMaterial.cptTitle} unfoldOrCollapseConfig={unfoldOrCollapseConfig} />
           <Scrollbars autoHide autoHideTimeout={1000} autoHideDuration={200}>
-            <GlobalStyleOptions configShowStatus={configShowStatus} />
-            {/* <BaseInfoOptions configShowStatus={configShowStatus} /> */}
-            {/* <JobIntentionOptions configShowStatus={configShowStatus} /> */}
-            {/* <EduBackgroundOptions configShowStatus={configShowStatus} /> */}
-            {/* <SkillSpecialtiesOptions configShowStatus={configShowStatus} /> */}
-            {/* <CampusExperienceOptions configShowStatus={configShowStatus} /> */}
-            {/* <WorkExperienceOptions configShowStatus={configShowStatus} /> */}
-            {/* <ProjectExperienceOptions configShowStatus={configShowStatus} /> */}
-            {/* <AwardsOptions configShowStatus={configShowStatus} /> */}
-            {/* <HobbiesOptions configShowStatus={configShowStatus} /> */}
-            {/* <SelfEvaluationOptions configShowStatus={configShowStatus} /> */}
-            {/* <WorksDisplayOptions configShowStatus={configShowStatus} /> */}
+            {selectMaterial.cptName ? (
+              <DynamicComponent
+                is={optionsComponents[selectMaterial.cptOptionsName]}
+                configShowStatus={configShowStatus}
+              />
+            ) : (
+              <GlobalStyleOptions configShowStatus={configShowStatus} />
+            )}
           </Scrollbars>
         </div>
       </aside>
