@@ -8,10 +8,10 @@ interface IMODELSTYLE {
   titleFontSize: string
   titleFontWeight: number
   backgroundColor: string
-  pLeftRight: string // 左右内边距
-  pTop: string // 上内边距
-  pBottom: string // 下内边距
-  mBottom: string
-  mTop: string
+  pLeftRight: number // 左右内边距
+  pTop: number // 上内边距
+  pBottom: number // 下内边距
+  mBottom: number
+  mTop: number
 }
-export default IMODELSTYLE
+export type { IMODELSTYLE }

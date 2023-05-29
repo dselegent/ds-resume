@@ -13,7 +13,7 @@ const reducers = combineReducers({
 const persistConfig = {
   key: 'redux-state',
   storage: storage,
-  whitelist: ['counter', 'resumeJson', 'selectMaterial'],
+  whitelist: ['counter', 'resumeJson'],
 }
 const persistedReducer = persistReducer(persistConfig, reducers)
 

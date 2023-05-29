@@ -1,11 +1,6 @@
 import IMODELDATAJSON from '@/interface/modelData'
 
 const MODEL_DATA_JSON: IMODELDATAJSON = {
-  RESUME_TITLE: {
-    model: 'RESUME_TITLE',
-    show: false,
-    title: '我的简历',
-  },
   BASE_INFO: {
     iconfont: 'ant-design-user-outlined',
     model: 'BASE_INFO',
@@ -15,6 +10,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     age: 21,
     address: '湖南长沙', // 所在地址
     avatar: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', // 头像地址
+    avatarShape: 'SQUARE_AVATAR',
     workService: 3, // 工作年限
     phoneNumber: '028-1234321', // 联系电话
     email: '12322233@qq.com', // 邮箱
@@ -131,52 +127,6 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
       campusBriefly: true,
       campusDuty: true,
       campusContent: true,
-    },
-  },
-  INTERNSHIP_EXPERIENCE: {
-    iconfont: 'icon-biyeshixi',
-    model: 'INTERNSHIP_EXPERIENCE',
-    show: true,
-    title: '实习经验',
-    LIST: [
-      {
-        date: ['2021-9', '2022-10'], // 实习时间
-        companyName: '业绩公司', // 公司名称
-        posts: '前端开发工程师', // 职位
-        jobContent: [
-          {
-            content: '主要工作内容是打杂',
-          },
-          {
-            content: '主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂',
-          },
-          {
-            content: '主要工作内容是打杂',
-          },
-        ],
-      },
-      {
-        date: ['2021-9', '2022-10'], // 实习时间
-        companyName: '业绩公司', // 公司名称
-        posts: '前端开发工程师', // 职位
-        jobContent: [
-          {
-            content: '主要工作内容是打杂',
-          },
-          {
-            content: '主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂',
-          },
-          {
-            content: '主要工作内容是打杂',
-          },
-        ],
-      },
-    ],
-    isShow: {
-      date: true,
-      companyName: true,
-      posts: true,
-      jobContent: true,
     },
   },
   WORK_EXPERIENCE: {

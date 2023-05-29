@@ -3,6 +3,8 @@ import { Scrollbars } from 'react-custom-scrollbars-2'
 import IDESIGNJSON from '@/interface/design'
 import MODEL_DATA_JSON from '@/schema/modelData'
 import optionsComponents from '@/utils/registerMaterialOptionsCom'
+import ResumeDefault from '@/material/ResumeBackground/ResumeDefault'
+import Custom from '@/template/custom'
 
 const Designer: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -73,7 +75,18 @@ const Designer: React.FC = () => {
           {/* 放大缩小 */}
           <ZoomAndOut setSizeCenter={setSizeCenter} />
           {/* 内容区域 */}
-          <div ref={htmlContentPdf}>content</div>
+          <DynamicComponent is={ResumeDefault}>
+            <div
+              ref={htmlContentPdf}
+              style={{
+                fontFamily: resumeJsonData.GLOBAL_STYLE.fontFamily
+                  ? resumeJsonData.GLOBAL_STYLE.fontFamily
+                  : '微软雅黑',
+              }}
+            >
+              <DynamicComponent is={Custom} />
+            </div>
+          </DynamicComponent>
         </div>
         {/* 属性设置面板 */}
         <div

@@ -1,4 +1,4 @@
-import IMODELSTYLE from './modelStyle'
+import type { IMODELSTYLE } from './modelStyle'
 
 interface IMATERIALITEM {
   keyId: string

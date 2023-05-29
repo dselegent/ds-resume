@@ -33,6 +33,26 @@ const resumeJsonSlice = createSlice({
       let { key, value } = payload
       state.resumeJsonData.GLOBAL_STYLE[key] = value
     },
+    // 改变模块数据
+    changeResumeJsonModelData(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        flag: string
+        cptKeyId: string
+        key: string
+        value: string | number
+      }>
+    ) {
+      let { flag, cptKeyId, key, value } = payload
+      let modelIndex = state.resumeJsonData.COMPONENTS.findIndex((item: IMATERIALITEM) => item.keyId === cptKeyId)
+      if (flag === 'isShow') {
+        state.resumeJsonData.COMPONENTS[modelIndex].data.isShow[key] = value
+      } else {
+        state.resumeJsonData.COMPONENTS[modelIndex][flag][key] = value
+      }
+    },
     // 改变模块排序
     changeResumeJsonComponentSort(state, { payload }: PayloadAction<Array<IMATERIALITEM | any>>) {
       state.resumeJsonData.COMPONENTS = payload
@@ -65,6 +85,7 @@ export const selectorResumeJsonData = (state: RootState) => state.resumeJson.res
 
 export const changeResumeJsonData = resumeJsonSlice.actions.changeResumeJsonData
 export const changeResumeJsonGlobalStyleData = resumeJsonSlice.actions.changeResumeJsonGlobalStyleData
+export const changeResumeJsonModelData = resumeJsonSlice.actions.changeResumeJsonModelData
 export const changeResumeJsonComponentSort = resumeJsonSlice.actions.changeResumeJsonComponentSort
 export const changeResumeJsonComponentShow = resumeJsonSlice.actions.changeResumeJsonComponentShow
 export const resetResumeJson = resumeJsonSlice.actions.resetResumeJson

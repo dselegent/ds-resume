@@ -1,39 +1,59 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import fontSizeList from '@/dictionary/fontSizeList'
 import fontWeightList from '@/dictionary/fontWeightList'
 import { Form, Select, Divider, Switch, InputNumber, Slider } from 'antd'
 
 const AntdSlider = styled(Slider)<{
-  countModel: boolean
+  countmodel: number
 }>`
-  display: ${props => (props.countModel ? 'none' : 'block')};
+  display: ${props => (props.countmodel == 1 ? 'none' : 'block')};
   margin-top: 10px;
 `
 const AntdInputNumber = styled(InputNumber)<{
-  countModel: boolean
+  countmodel: number
 }>`
-  display: ${props => (props.countModel ? 'block' : 'none')};
+  display: ${props => (props.countmodel == 1 ? 'block' : 'none')};
   width: 100%;
 `
 
 type CommonOptionsPropsType = {
-  commonOptionsStyleForm: any
+  cptKeyId: string
+  modelItem: IMATERIALITEM
 }
 
-const CommonOptions: React.FC<CommonOptionsPropsType> = ({ commonOptionsStyleForm }) => {
+const CommonOptions: React.FC<CommonOptionsPropsType> = ({ cptKeyId, modelItem }) => {
+  const dispatch = useAppDispatch()
+
+  // 计数器模式
+  const [countModel, setCountModel] = useLocalStorageState('countModel', {
+    defaultValue: 0,
+  })
+
+  // 更新模块样式
+  const handleChangeModelStyle = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'style',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
   return (
     <>
       <Form.Item label='字体颜色'>
         <ColorPicker
-          color={commonOptionsStyleForm.textColor}
-          getColor={(value: string) => (commonOptionsStyleForm.textColor = value)}
+          color={modelItem.style.textColor}
+          getColor={(value: string) => handleChangeModelStyle('textColor', value)}
         />
       </Form.Item>
       <Form.Item label='字体大小'>
         <Select
           size='small'
-          value={commonOptionsStyleForm.textFontSize}
-          onChange={(value: string) => (commonOptionsStyleForm.textFontSize = value)}
+          value={modelItem.style.textFontSize}
+          onChange={(value: string) => handleChangeModelStyle('textFontSize', value)}
         >
           {fontSizeList.map((value: string, index: number) => (
             <Select.Option key={index} value={value} label={value}>
@@ -45,8 +65,8 @@ const CommonOptions: React.FC<CommonOptionsPropsType> = ({ commonOptionsStyleFor
       <Form.Item label='字体粗细'>
         <Select
           size='small'
-          value={commonOptionsStyleForm.textFontWeight}
-          onChange={(value: number) => (commonOptionsStyleForm.textFontWeight = value)}
+          value={modelItem.style.textFontWeight}
+          onChange={(value: number) => handleChangeModelStyle('textFontWeight', value)}
         >
           {fontWeightList.map((value: number, index: number) => (
             <Select.Option key={index} value={value} label={value}>
@@ -59,85 +79,81 @@ const CommonOptions: React.FC<CommonOptionsPropsType> = ({ commonOptionsStyleFor
         <span className='text-sm font-700 text-stone-700 letter-3'>间距调整</span>
       </Divider>
       <Form.Item label='计数器模式'>
-        <Switch
-          size='small'
-          onChange={(value: boolean) => (commonOptionsStyleForm.countModel = value)}
-          checked={commonOptionsStyleForm.countModel}
-        />
+        <Switch size='small' onChange={(value: boolean) => setCountModel(Number(value))} checked={!!countModel} />
       </Form.Item>
       <Form.Item label='上外边距'>
         <AntdSlider
-          countModel={commonOptionsStyleForm.countModel}
-          value={commonOptionsStyleForm.marginTop}
-          onChange={(value: number) => (commonOptionsStyleForm.marginTop = value)}
+          countmodel={countModel}
+          value={modelItem.style.mTop}
+          onChange={(value: number) => handleChangeModelStyle('mTop', value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={commonOptionsStyleForm.countModel}
+          countmodel={countModel}
           size='small'
-          value={commonOptionsStyleForm.marginTop}
-          onChange={(value: any) => (commonOptionsStyleForm.marginTop = value)}
+          value={modelItem.style.mTop}
+          onChange={(value: any) => handleChangeModelStyle('mTop', value)}
         />
       </Form.Item>
       <Form.Item label='下外边距'>
         <AntdSlider
-          countModel={commonOptionsStyleForm.countModel}
-          value={commonOptionsStyleForm.marginBottom}
-          onChange={(value: number) => (commonOptionsStyleForm.marginBottom = value)}
+          countmodel={countModel}
+          value={modelItem.style.mBottom}
+          onChange={(value: number) => handleChangeModelStyle('mBottom', value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={commonOptionsStyleForm.countModel}
+          countmodel={countModel}
           size='small'
-          value={commonOptionsStyleForm.marginBottom}
-          onChange={(value: any) => (commonOptionsStyleForm.marginBottom = value)}
+          value={modelItem.style.mBottom}
+          onChange={(value: any) => handleChangeModelStyle('mBottom', value)}
         />
       </Form.Item>
       <Form.Item label='上内边距'>
         <AntdSlider
-          countModel={commonOptionsStyleForm.countModel}
-          value={commonOptionsStyleForm.paddingTop}
-          onChange={(value: number) => (commonOptionsStyleForm.paddingTop = value)}
+          countmodel={countModel}
+          value={modelItem.style.pTop}
+          onChange={(value: number) => handleChangeModelStyle('pTop', value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={commonOptionsStyleForm.countModel}
+          countmodel={countModel}
           size='small'
-          value={commonOptionsStyleForm.paddingTop}
-          onChange={(value: any) => (commonOptionsStyleForm.paddingTop = value)}
+          value={modelItem.style.pTop}
+          onChange={(value: any) => handleChangeModelStyle('pTop', value)}
         />
       </Form.Item>
       <Form.Item label='下内边距'>
         <AntdSlider
-          countModel={commonOptionsStyleForm.countModel}
-          value={commonOptionsStyleForm.paddingBottom}
-          onChange={(value: number) => (commonOptionsStyleForm.paddingBottom = value)}
+          countmodel={countModel}
+          value={modelItem.style.pBottom}
+          onChange={(value: number) => handleChangeModelStyle('pBottom', value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={commonOptionsStyleForm.countModel}
+          countmodel={countModel}
           size='small'
-          value={commonOptionsStyleForm.paddingBottom}
-          onChange={(value: any) => (commonOptionsStyleForm.paddingBottom = value)}
+          value={modelItem.style.pBottom}
+          onChange={(value: any) => handleChangeModelStyle('pBottom', value)}
         />
       </Form.Item>
       <Form.Item label='左右内边距'>
         <AntdSlider
-          countModel={commonOptionsStyleForm.countModel}
-          value={commonOptionsStyleForm.paddingX}
-          onChange={(value: number) => (commonOptionsStyleForm.paddingX = value)}
+          countmodel={countModel}
+          value={modelItem.style.pLeftRight}
+          onChange={(value: number) => handleChangeModelStyle('pLeftRight', value)}
           max={100}
           min={-100}
         />
         <AntdInputNumber
-          countModel={commonOptionsStyleForm.countModel}
+          countmodel={countModel}
           size='small'
-          value={commonOptionsStyleForm.paddingX}
-          onChange={(value: any) => (commonOptionsStyleForm.paddingX = value)}
+          value={modelItem.style.pLeftRight}
+          onChange={(value: any) => handleChangeModelStyle('pLeftRight', value)}
         />
       </Form.Item>
     </>

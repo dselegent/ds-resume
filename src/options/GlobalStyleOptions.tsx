@@ -5,15 +5,15 @@ import { Form, Select, Divider, Switch, Slider, InputNumber } from 'antd'
 import type { SelectProps } from 'antd'
 
 const AntdSlider = styled(Slider)<{
-  countModel: boolean
+  countmodel: number
 }>`
-  display: ${props => (props.countModel ? 'none' : 'block')};
+  display: ${props => (props.countmodel ? 'none' : 'block')};
   margin-top: 10px;
 `
 const AntdInputNumber = styled(InputNumber)<{
-  countModel: boolean
+  countmodel: number
 }>`
-  display: ${props => (props.countModel ? 'block' : 'none')};
+  display: ${props => (props.countmodel == 1 ? 'block' : 'none')};
   width: 100%;
 `
 
@@ -59,8 +59,8 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
   const dispatch = useAppDispatch()
 
   // 计数器模式
-  const [countModel, setCountModel] = useLocalStorageState<boolean>('countModel', {
-    defaultValue: true,
+  const [countModel, setCountModel] = useLocalStorageState('countModel', {
+    defaultValue: 0,
   })
 
   // 全局样式设置
@@ -173,18 +173,18 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
           <span className='text-sm font-700 text-stone-700 letter-3'>间距调整</span>
         </Divider>
         <Form.Item label='计数器模式'>
-          <Switch size='small' onChange={(value: boolean) => setCountModel(value)} checked={countModel} />
+          <Switch size='small' onChange={(value: boolean) => setCountModel(Number(value))} checked={!!countModel} />
         </Form.Item>
         <Form.Item label='模块上外边距'>
           <AntdSlider
-            countModel={countModel}
+            countmodel={countModel}
             value={GLOBAL_STYLE.modelMarginTop}
             onChange={(value: number) => handleChangeGlobalStyle('modelMarginTop', value)}
             max={100}
             min={-100}
           />
           <AntdInputNumber
-            countModel={countModel}
+            countmodel={countModel}
             size='small'
             value={GLOBAL_STYLE.modelMarginTop}
             onChange={(value: any) => handleChangeGlobalStyle('modelMarginTop', value)}
@@ -192,14 +192,14 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
         </Form.Item>
         <Form.Item label='模块下外边距'>
           <AntdSlider
-            countModel={countModel}
+            countmodel={countModel}
             value={GLOBAL_STYLE.modelMarginBottom}
             onChange={(value: number) => handleChangeGlobalStyle('modelMarginBottom', value)}
             max={100}
             min={-100}
           />
           <AntdInputNumber
-            countModel={countModel}
+            countmodel={countModel}
             size='small'
             value={GLOBAL_STYLE.modelMarginBottom}
             onChange={(value: any) => handleChangeGlobalStyle('modelMarginBottom', value)}
@@ -207,14 +207,14 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
         </Form.Item>
         <Form.Item label='模块上内边距'>
           <AntdSlider
-            countModel={countModel}
+            countmodel={countModel}
             value={GLOBAL_STYLE.pTop}
             onChange={(value: number) => handleChangeGlobalStyle('pTop', value)}
             max={100}
             min={-100}
           />
           <AntdInputNumber
-            countModel={countModel}
+            countmodel={countModel}
             size='small'
             value={GLOBAL_STYLE.pTop}
             onChange={(value: any) => handleChangeGlobalStyle('pTop', value)}
@@ -222,14 +222,14 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
         </Form.Item>
         <Form.Item label='模块下内边距'>
           <AntdSlider
-            countModel={countModel}
+            countmodel={countModel}
             value={GLOBAL_STYLE.pBottom}
             onChange={(value: number) => handleChangeGlobalStyle('pBottom', value)}
             max={100}
             min={-100}
           />
           <AntdInputNumber
-            countModel={countModel}
+            countmodel={countModel}
             size='small'
             value={GLOBAL_STYLE.pBottom}
             onChange={(value: any) => handleChangeGlobalStyle('pBottom', value)}
@@ -237,14 +237,14 @@ const GlobalStyleOptions: React.FC<GlobalStyleOptionsType> = ({ configShowStatus
         </Form.Item>
         <Form.Item label='模块左右内边距'>
           <AntdSlider
-            countModel={countModel}
+            countmodel={countModel}
             value={GLOBAL_STYLE.pLeftRight}
             onChange={(value: number) => handleChangeGlobalStyle('pLeftRight', value)}
             max={100}
             min={-100}
           />
           <AntdInputNumber
-            countModel={countModel}
+            countmodel={countModel}
             size='small'
             value={GLOBAL_STYLE.pLeftRight}
             onChange={(value: any) => handleChangeGlobalStyle('pLeftRight', value)}

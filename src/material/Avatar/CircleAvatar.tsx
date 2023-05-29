@@ -1,5 +1,7 @@
 import React from 'react'
 import defaultAvatar from '@/assets/images/people.jpg'
+import type { IBASEINFO } from '@/interface/model'
+
 import { Image } from 'antd'
 
 const CircleAvatarBox = styled.section<{
@@ -13,23 +15,35 @@ const CircleAvatarBox = styled.section<{
 type CircleAvatarPropsType = {
   width?: string
   height?: string
+  modelData?: IBASEINFO | null
 }
 
-const CircleAvatar: React.FC<CircleAvatarPropsType> = ({ width = '115px', height = '115px' }) => {
+const CircleAvatar: React.FC<CircleAvatarPropsType> = ({ width = '115px', height = '115px', modelData }) => {
   return (
     <CircleAvatarBox
       width={width}
       height={height}
-      className='f-c-c cursor-pointer overflow-hidden border-3 border-gray-300 rounded-full border-solid'
+      className='f-c-c cursor-pointer overflow-hidden border-3 border-slate-100 rounded-full border-solid'
     >
-      <Image
-        src={defaultAvatar}
-        alt='circleAvatar'
-        width='100%'
-        height='100%'
-        className='rounded-[8%] object-cover'
-        preview={false}
-      />
+      {modelData?.avatar ? (
+        <Image
+          src={modelData?.avatar}
+          alt='circleAvatar'
+          width='100%'
+          height='100%'
+          className='rounded-[8%] object-cover'
+          preview={false}
+        />
+      ) : (
+        <Image
+          src={defaultAvatar}
+          alt='circleAvatar'
+          width='100%'
+          height='100%'
+          className='rounded-[8%] object-cover'
+          preview={false}
+        />
+      )}
     </CircleAvatarBox>
   )
 }
