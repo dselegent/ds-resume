@@ -26,6 +26,7 @@ export default defineConfig({
     'wh-full': 'w-full h-full',
     'f-c-c': 'flex justify-center items-center',
     'f-b-c': 'flex justify-between items-center',
+    'flex-col-center': 'f-c-c flex-col',
     'text-ellipsis': 'truncate',
     'flex-col': 'flex flex-col',
     'transition-base': 'transition-all duration-300 ease-in-out',

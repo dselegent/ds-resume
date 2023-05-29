@@ -12,7 +12,7 @@ const NotFound: React.FC = () => {
 
   return (
     <AntdResult
-      className='h-full f-c-c flex-col'
+      className='h-full flex-col-center'
       status='404'
       title='404'
       subTitle='抱歉，您访问的这个页面不存在。'
