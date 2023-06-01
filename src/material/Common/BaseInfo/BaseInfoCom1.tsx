@@ -10,8 +10,7 @@ const BaseInfoSection = styled.section<{
   mBottom: number
   pTop: number
   pBottom: number
-  pLeft: number
-  pRight: number
+  pLeftRight: number
 }>(
   {
     backgroundImage: `url(${templateBg})`,
@@ -21,8 +20,8 @@ const BaseInfoSection = styled.section<{
     marginBottom: props.mBottom + 'px',
     paddingTop: props.pTop + 'px',
     paddingBottom: props.pBottom + 'px',
-    paddingLeft: props.pLeft + 'px',
-    paddingRight: props.pRight + 'px',
+    paddingLeft: props.pLeftRight + 'px',
+    paddingRight: props.pLeftRight + 'px',
   })
 )
 
@@ -34,10 +33,8 @@ type BaseInfoCom1PropsType = {
 const BaseInfoCom1: React.FC<BaseInfoCom1PropsType> = ({ modelData, modelStyle }) => {
   return (
     <BaseInfoSection
-      className='box-border h-62.5 w-full flex justify-between border-0 border-b border-gray-300 border-dashed bg-no-repeat py-10 pl-7.5 pr-12.5'
       {...modelStyle}
-      pLeft={modelStyle.pLeftRight}
-      pRight={modelStyle.pLeftRight}
+      className='box-border h-62.5 w-full flex justify-between border-0 border-b border-gray-300 border-dashed bg-no-repeat py-10 pl-7.5 pr-12.5'
     >
       {/* 个人信息 */}
       <UserInfoCom1 modelData={modelData} modelStyle={modelStyle} />
