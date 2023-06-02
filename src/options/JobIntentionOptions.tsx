@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input, Switch, Space, Select } from 'antd'
 
 const AntdTabs = styled(Tabs)`
@@ -21,36 +22,36 @@ type JobIntentionOptionsPropsType = {
 }
 
 const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configShowStatus }) => {
-  const jobIntentionOptionsStyleForm = useReactive({
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
-  const jobIntentionOptionsDataForm = useReactive({
-    title: '求职意向',
-    jobSearchType: '全职',
-    intendedPositions: '前端开发工程师',
-    intendedCity: '长沙',
-    expectSalary: '4000-5000',
-    jobStatus: '随时入职',
-    isShow: {
-      jobSearchType: true,
-      intendedPositions: true,
-      intendedCity: true,
-      expectSalary: true,
-      jobStatus: true,
-    },
-  })
+  const dispatch = useAppDispatch()
 
-  const onChange = (key: string) => {
-    console.log(key)
-  }
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
+
+  // 更新模块数据
+  const handleChangeModelData = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'data',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 更新模块内数据显示
+  const handleChangeModelShow = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'isShow',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
 
   return (
     <AntdTabs
@@ -68,7 +69,7 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
               labelAlign='left'
             >
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={jobIntentionOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -84,8 +85,8 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
             >
               <Form.Item label='标题名称'>
                 <Input
-                  value={jobIntentionOptionsDataForm.title}
-                  onChange={e => (jobIntentionOptionsDataForm.title = e.target.value)}
+                  value={modelItem.data.title}
+                  onChange={e => handleChangeModelData('title', e.target.value)}
                   size='small'
                   showCount
                   maxLength={15}
@@ -95,8 +96,8 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
                 <AntdSpace direction='horizontal'>
                   <Select
                     size='small'
-                    value={jobIntentionOptionsDataForm.jobSearchType}
-                    onChange={(value: string) => (jobIntentionOptionsDataForm.jobSearchType = value)}
+                    value={modelItem.data.jobSearchType}
+                    onChange={(value: string) => handleChangeModelData('jobSearchType', value)}
                   >
                     {jobSearchTypeList.map((value: string) => (
                       <Select.Option key={value} value={value} label={value}>
@@ -106,56 +107,56 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
                   </Select>
                   <Switch
                     size='small'
-                    onChange={(value: boolean) => (jobIntentionOptionsDataForm.isShow.jobSearchType = value)}
-                    checked={jobIntentionOptionsDataForm.isShow.jobSearchType}
+                    onChange={(value: boolean) => handleChangeModelShow('jobSearchType', value)}
+                    checked={modelItem.data.isShow.jobSearchType}
                   />
                 </AntdSpace>
               </Form.Item>
               <Form.Item label='意向岗位'>
                 <AntdSpace direction='horizontal'>
                   <Input
-                    value={jobIntentionOptionsDataForm.intendedPositions}
-                    onChange={e => (jobIntentionOptionsDataForm.intendedPositions = e.target.value)}
+                    value={modelItem.data.intendedPositions}
+                    onChange={e => handleChangeModelData('intendedPositions', e.target.value)}
                     size='small'
                     showCount
                     maxLength={15}
                   />
                   <Switch
                     size='small'
-                    onChange={(value: boolean) => (jobIntentionOptionsDataForm.isShow.intendedPositions = value)}
-                    checked={jobIntentionOptionsDataForm.isShow.intendedPositions}
+                    onChange={(value: boolean) => handleChangeModelShow('intendedPositions', value)}
+                    checked={modelItem.data.isShow.intendedPositions}
                   />
                 </AntdSpace>
               </Form.Item>
               <Form.Item label='意向城市'>
                 <AntdSpace direction='horizontal'>
                   <Input
-                    value={jobIntentionOptionsDataForm.intendedCity}
-                    onChange={e => (jobIntentionOptionsDataForm.intendedCity = e.target.value)}
+                    value={modelItem.data.intendedCity}
+                    onChange={e => handleChangeModelData('intendedCity', e.target.value)}
                     size='small'
                     showCount
                     maxLength={15}
                   />
                   <Switch
                     size='small'
-                    onChange={(value: boolean) => (jobIntentionOptionsDataForm.isShow.intendedCity = value)}
-                    checked={jobIntentionOptionsDataForm.isShow.intendedCity}
+                    onChange={(value: boolean) => handleChangeModelShow('intendedCity', value)}
+                    checked={modelItem.data.isShow.intendedCity}
                   />
                 </AntdSpace>
               </Form.Item>
               <Form.Item label='期望薪资'>
                 <AntdSpace direction='horizontal'>
                   <Input
-                    value={jobIntentionOptionsDataForm.expectSalary}
-                    onChange={e => (jobIntentionOptionsDataForm.expectSalary = e.target.value)}
+                    value={modelItem.data.expectSalary}
+                    onChange={e => handleChangeModelData('expectSalary', e.target.value)}
                     size='small'
                     showCount
                     maxLength={15}
                   />
                   <Switch
                     size='small'
-                    onChange={(value: boolean) => (jobIntentionOptionsDataForm.isShow.expectSalary = value)}
-                    checked={jobIntentionOptionsDataForm.isShow.expectSalary}
+                    onChange={(value: boolean) => handleChangeModelShow('expectSalary', value)}
+                    checked={modelItem.data.isShow.expectSalary}
                   />
                 </AntdSpace>
               </Form.Item>
@@ -163,8 +164,8 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
                 <AntdSpace direction='horizontal'>
                   <Select
                     size='small'
-                    value={jobIntentionOptionsDataForm.jobStatus}
-                    onChange={(value: string) => (jobIntentionOptionsDataForm.jobStatus = value)}
+                    value={modelItem.data.jobStatus}
+                    onChange={(value: string) => handleChangeModelData('jobStatus', value)}
                   >
                     {jobStatusList.map((value: string) => (
                       <Select.Option key={value} value={value} label={value}>
@@ -174,8 +175,8 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
                   </Select>
                   <Switch
                     size='small'
-                    onChange={(value: boolean) => (jobIntentionOptionsDataForm.isShow.jobStatus = value)}
-                    checked={jobIntentionOptionsDataForm.isShow.jobStatus}
+                    onChange={(value: boolean) => handleChangeModelShow('jobStatus', value)}
+                    checked={modelItem.data.isShow.jobStatus}
                   />
                 </AntdSpace>
               </Form.Item>
@@ -183,7 +184,6 @@ const JobIntentionOptions: React.FC<JobIntentionOptionsPropsType> = ({ configSho
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }
