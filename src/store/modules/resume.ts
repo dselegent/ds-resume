@@ -39,7 +39,7 @@ const resumeJsonSlice = createSlice({
       {
         payload,
       }: PayloadAction<{
-        flag: string
+        flag: string | number
         cptKeyId: string
         key: string
         value: string | number
@@ -49,9 +49,39 @@ const resumeJsonSlice = createSlice({
       let modelIndex = state.resumeJsonData.COMPONENTS.findIndex((item: IMATERIALITEM) => item.keyId === cptKeyId)
       if (flag === 'isShow') {
         state.resumeJsonData.COMPONENTS[modelIndex].data.isShow[key] = value
+      } else if (typeof flag === 'number') {
+        state.resumeJsonData.COMPONENTS[modelIndex].data.LIST[flag][key] = value
       } else {
         state.resumeJsonData.COMPONENTS[modelIndex][flag][key] = value
       }
+    },
+    // 添加模块内列表数据
+    pushResumeJsonModelListData(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        cptKeyId: string
+        value: Object
+      }>
+    ) {
+      let { cptKeyId, value } = payload
+      let modelIndex = state.resumeJsonData.COMPONENTS.findIndex((item: IMATERIALITEM) => item.keyId === cptKeyId)
+      state.resumeJsonData.COMPONENTS[modelIndex].data.LIST.push(value)
+    },
+    // 删除模块内列表数据
+    deleteResumeJsonModelListData(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        cptKeyId: string
+        index: number
+      }>
+    ) {
+      let { cptKeyId, index } = payload
+      let modelIndex = state.resumeJsonData.COMPONENTS.findIndex((item: IMATERIALITEM) => item.keyId === cptKeyId)
+      state.resumeJsonData.COMPONENTS[modelIndex].data.LIST.splice(index, 1)
     },
     // 改变模块排序
     changeResumeJsonComponentSort(state, { payload }: PayloadAction<Array<IMATERIALITEM | any>>) {
@@ -88,6 +118,8 @@ export const changeResumeJsonGlobalStyleData = resumeJsonSlice.actions.changeRes
 export const changeResumeJsonModelData = resumeJsonSlice.actions.changeResumeJsonModelData
 export const changeResumeJsonComponentSort = resumeJsonSlice.actions.changeResumeJsonComponentSort
 export const changeResumeJsonComponentShow = resumeJsonSlice.actions.changeResumeJsonComponentShow
+export const pushResumeJsonModelListData = resumeJsonSlice.actions.pushResumeJsonModelListData
+export const deleteResumeJsonModelListData = resumeJsonSlice.actions.deleteResumeJsonModelListData
 export const resetResumeJson = resumeJsonSlice.actions.resetResumeJson
 
 export const resumeJson = resumeJsonSlice.reducer

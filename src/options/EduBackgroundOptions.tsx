@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input, Button, Space, Switch, Select } from 'antd'
 
 const AntdTabs = styled(Tabs)`
@@ -21,54 +22,65 @@ type EduBackgroundOptionsPropsType = {
 }
 
 const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configShowStatus }) => {
-  const eduBackgroundOptionsStyleForm = useReactive({
-    titleColor: '#000',
-    titleFontSize: '14px',
-    titleFontWeight: 600,
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const eduBackgroundOptionsDataForm = useReactive({
-    list: [
-      {
-        date: ['2020-09', '2024-06'],
-        schoolName: '野鸡大学1',
-        specialized: '通信工程1',
-        degree: '本科',
-        majorCourse: '主修计算机技术、Java、c++等等',
-      },
-      {
-        date: ['2020-09', '2024-06'],
-        schoolName: '野鸡大学2',
-        specialized: '通信工程2',
-        degree: '本科',
-        majorCourse: '主修计算机技术、Java、c++等等',
-      },
-    ],
-    isShow: {
-      date: true,
-      schoolName: true,
-      specialized: true,
-      degree: true,
-      majorCourse: true,
-    },
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
+  // 更新模块中的列表数据
+  const handleChangeModelListData = (index: number, key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 更新模块内数据显示
+  const handleChangeModelShow = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'isShow',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 添加学历
+  const addEdu = () => {
+    dispatch(
+      pushResumeJsonModelListData({
+        cptKeyId,
+        value: {
+          date: ['2020-9', '2024-6'],
+          schoolName: 'xx大学', // 学校名称
+          specialized: '计算机科学与技术', // 专业
+          degree: '本科', // 学历
+          majorCourse: '主修计算机技术、Java、c++等等', // 主修课程
+        },
+      })
+    )
+  }
+
+  // 删除学历
+  const deleteEdu = (index: number) => {
+    dispatch(
+      deleteResumeJsonModelListData({
+        cptKeyId,
+        index,
+      })
+    )
   }
 
   return (
     <AntdTabs
-      defaultActiveKey='6jnnVHZhHU'
       type='card'
       centered
       items={[
@@ -83,9 +95,9 @@ const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configS
               labelAlign='left'
             >
               {/* 公共标题样式属性 */}
-              <CommonTitleOptions commonTitleOptionsStyleForm={eduBackgroundOptionsStyleForm} />
+              <CommonTitleOptions cptKeyId={cptKeyId} modelItem={modelItem} />
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={eduBackgroundOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -94,7 +106,7 @@ const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configS
           label: '数据配置',
           children: (
             <>
-              {eduBackgroundOptionsDataForm.list.map((item, index) => (
+              {modelItem.data.LIST.map((item: any, index: number) => (
                 <Form
                   labelCol={{
                     span: configShowStatus ? 4 : 6,
@@ -112,22 +124,28 @@ const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configS
                       icon={<i className='i-ant-design-delete-outlined' />}
                       shape='circle'
                       size='small'
+                      onClick={() => deleteEdu(index)}
                     />
                   </p>
-                  <DateFormItem item={item} isShow={eduBackgroundOptionsDataForm.isShow} />
+                  <DateFormItem
+                    item={item}
+                    isShow={modelItem.data.isShow.date}
+                    changeDate={(value: [string, string]) => handleChangeModelListData(index, 'date', value)}
+                    changeDateShow={(value: boolean) => handleChangeModelShow('date', value)}
+                  />
                   <Form.Item label='学校名称'>
                     <AntdSpace direction='horizontal'>
                       <Input
                         value={item.schoolName}
-                        onChange={e => (item.schoolName = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'schoolName', e.target.value)}
                         size='small'
                         showCount
                         maxLength={40}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (eduBackgroundOptionsDataForm.isShow.schoolName = value)}
-                        checked={eduBackgroundOptionsDataForm.isShow.schoolName}
+                        onChange={(value: boolean) => handleChangeModelShow('schoolName', value)}
+                        checked={modelItem.data.isShow.schoolName}
                       />
                     </AntdSpace>
                   </Form.Item>
@@ -135,21 +153,25 @@ const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configS
                     <AntdSpace direction='horizontal'>
                       <Input
                         value={item.specialized}
-                        onChange={e => (item.specialized = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'specialized', e.target.value)}
                         size='small'
                         showCount
                         maxLength={20}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (eduBackgroundOptionsDataForm.isShow.specialized = value)}
-                        checked={eduBackgroundOptionsDataForm.isShow.specialized}
+                        onChange={(value: boolean) => handleChangeModelShow('specialized', value)}
+                        checked={modelItem.data.isShow.specialized}
                       />
                     </AntdSpace>
                   </Form.Item>
                   <Form.Item label='学历学位'>
                     <AntdSpace direction='horizontal'>
-                      <Select size='small' value={item.degree} onChange={(value: string) => (item.degree = value)}>
+                      <Select
+                        size='small'
+                        value={item.degree}
+                        onChange={(value: string) => handleChangeModelListData(index, 'degree', value)}
+                      >
                         {degreeList.map((value: string) => (
                           <Select.Option key={value} value={value} label={value}>
                             {value}
@@ -158,8 +180,8 @@ const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configS
                       </Select>
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (eduBackgroundOptionsDataForm.isShow.degree = value)}
-                        checked={eduBackgroundOptionsDataForm.isShow.degree}
+                        onChange={(value: boolean) => handleChangeModelShow('degree', value)}
+                        checked={modelItem.data.isShow.degree}
                       />
                     </AntdSpace>
                   </Form.Item>
@@ -169,25 +191,24 @@ const EduBackgroundOptions: React.FC<EduBackgroundOptionsPropsType> = ({ configS
                         rows={6}
                         size='small'
                         value={item.majorCourse}
-                        onChange={e => (item.majorCourse = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'majorCourse', e.target.value)}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (eduBackgroundOptionsDataForm.isShow.majorCourse = value)}
-                        checked={eduBackgroundOptionsDataForm.isShow.majorCourse}
+                        onChange={(value: boolean) => handleChangeModelShow('majorCourse', value)}
+                        checked={modelItem.data.isShow.majorCourse}
                       />
                     </AntdSpace>
                   </Form.Item>
                 </Form>
               ))}
-              <Button className='mt-3' type='primary' size='small'>
+              <Button className='mt-3' type='primary' size='small' onClick={addEdu}>
                 添加学历
               </Button>
             </>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }

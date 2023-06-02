@@ -17,12 +17,12 @@ const dateFormat = 'YYYY-MM'
 
 type DateFormItemPropsType = {
   item: any
-  isShow: {
-    [propName: string]: boolean
-  }
+  isShow: boolean
+  changeDate: Function
+  changeDateShow: Function
 }
 
-const DateFormItem: React.FC<DateFormItemPropsType> = ({ item, isShow }) => {
+const DateFormItem: React.FC<DateFormItemPropsType> = ({ item, isShow, changeDate, changeDateShow }) => {
   return (
     <Form.Item label='日期选择'>
       <AntdSpace>
@@ -31,9 +31,9 @@ const DateFormItem: React.FC<DateFormItemPropsType> = ({ item, isShow }) => {
           picker='month'
           size='small'
           value={[dayjs(item.date[0], dateFormat), dayjs(item.date[1], dateFormat)]}
-          onChange={(date, dateString) => (item.date = dateString)}
+          onChange={(date, dateString) => changeDate(dateString)}
         />
-        <Switch size='small' checked={isShow.date} onChange={(value: boolean) => (isShow.date = value)} />
+        <Switch size='small' checked={isShow} onChange={(value: boolean) => changeDateShow(value)} />
       </AntdSpace>
     </Form.Item>
   )
