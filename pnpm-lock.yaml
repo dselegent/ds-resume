@@ -12,6 +12,7 @@ specifiers:
   '@emotion/react': ^11.11.0
   '@emotion/styled': ^11.11.0
   '@iconify-json/ant-design': ^1.1.5
+  '@iconify-json/material-symbols': ^1.1.44
   '@reduxjs/toolkit': ^1.9.3
   '@types/lodash-es': ^4.17.7
   '@types/node': ^18.0.0
@@ -81,6 +82,7 @@ devDependencies:
   '@commitlint/cli': 17.5.1
   '@commitlint/config-conventional': 17.4.4
   '@iconify-json/ant-design': 1.1.5
+  '@iconify-json/material-symbols': 1.1.44
   '@types/lodash-es': 4.17.7
   '@types/node': 18.15.11
   '@types/react': 18.0.33
@@ -890,6 +892,12 @@ packages:
 
   /@iconify-json/ant-design/1.1.5:
     resolution: {integrity: sha512-lNEC95u9QdmS3GfMLnbAjLZCfQ9i4xURyn7P4UVHa6ejjLjs5FVyi/J+itrmnBpwb36YZo4CT0GDIn2AgvkNng==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/material-symbols/1.1.44:
+    resolution: {integrity: sha512-h4ORLdT9zcmtaYuGsbI1Jrvtd28yPIY3qi/YaTsiTwyA1ebsPQ3EW0g2/lkQf5VeonDTrzXvGz/QKByxwhJFRg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

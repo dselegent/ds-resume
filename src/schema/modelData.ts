@@ -46,22 +46,15 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   EDU_BACKGROUND: {
-    iconfont: 'icon-education-1-copy',
+    iconfont: 'material-symbols-school-outline',
     model: 'EDU_BACKGROUND',
     show: true,
     title: '教育背景',
     LIST: [
       {
-        date: ['2015-5', '2019-6'],
-        schoolName: '野鸡大学', // 学校名称
-        specialized: '通信工程', // 专业
-        degree: '本科', // 学历
-        majorCourse: '主修计算机技术、Java、c++等等', // 主修课程
-      },
-      {
-        date: ['2015-5', '2019-6'],
-        schoolName: '野鸡大学', // 学校名称
-        specialized: '通信工程', // 专业
+        date: ['2020-9', '2024-6'],
+        schoolName: 'xx大学', // 学校名称
+        specialized: '计算机科学与技术', // 专业
         degree: '本科', // 学历
         majorCourse: '主修计算机技术、Java、c++等等', // 主修课程
       },
@@ -75,10 +68,10 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   SKILL_SPECIALTIES: {
-    iconfont: 'icon-zhuanyezhishijineng',
+    iconfont: 'material-symbols-menu-book-outline-rounded',
     model: 'SKILL_SPECIALTIES',
     show: true,
-    title: '技能特长',
+    title: '专业技能',
     LIST: [
       {
         skillName: 'JavaScript', // 技能名称
@@ -103,7 +96,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     ],
   },
   CAMPUS_EXPERIENCE: {
-    iconfont: 'icon-jiatimianban_timu',
+    iconfont: 'material-symbols-edit-note',
     model: 'CAMPUS_EXPERIENCE',
     show: true,
     title: '校园经历',
@@ -130,7 +123,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   WORK_EXPERIENCE: {
-    iconfont: 'icon-gongzuojingyan',
+    iconfont: 'material-symbols-work-history-outline',
     model: 'WORK_EXPERIENCE',
     show: true,
     title: '工作经验',
@@ -153,7 +146,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   PROJECT_EXPERIENCE: {
-    iconfont: 'icon-xiangmu',
+    iconfont: 'material-symbols-library-books-outline-rounded',
     model: 'PROJECT_EXPERIENCE',
     show: true,
     title: '项目经验',
@@ -176,7 +169,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   AWARDS: {
-    iconfont: 'icon-rongyu1',
+    iconfont: 'ant-design-trophy-outlined',
     model: 'AWARDS',
     show: true,
     title: '荣誉奖项',
@@ -194,7 +187,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   HOBBIES: {
-    iconfont: 'icon-xingquaihao',
+    iconfont: 'material-symbols-sports-baseball-outline',
     model: 'HOBBIES',
     show: true,
     title: '兴趣爱好',
@@ -208,14 +201,14 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     },
   },
   SELF_EVALUATION: {
-    iconfont: 'icon-ziwopingjia',
+    iconfont: 'material-symbols-edit-note',
     model: 'SELF_EVALUATION',
     show: true,
     title: '自我评价',
     content: '我是一个没有责任感的人',
   },
   WORKS_DISPLAY: {
-    iconfont: 'icon-zhuanyezhishijineng',
+    iconfont: 'material-symbols-folder-open-outline-rounded',
     model: 'WORKS_DISPLAY',
     show: true,
     title: '作品展示',

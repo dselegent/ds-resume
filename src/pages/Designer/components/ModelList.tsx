@@ -34,7 +34,7 @@ const ModelList: React.FC<ModelListPropsType> = ({ leftShowStatus }) => {
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <i className='i-ant-design-book-outlined i-ant-design-usergroup-add-outlined display-none'></i>
+      <i className='i-ant-design-book-outlined i-ant-design-usergroup-add-outlined i-material-symbols-school-outline i-ant-design-trophy-outlined i-material-symbols-edit-note i-material-symbols-sports-baseball-outline i-material-symbols-sports-baseball-outline i-material-symbols-menu-book-outline-rounded i-material-symbols-work-history-outline i-material-symbols-library-books-outline-rounded i-material-symbols-folder-open-outline-rounded display-none'></i>
       <SortableContext items={resumeJsonData.COMPONENTS.map(i => i.keyId)} strategy={verticalListSortingStrategy}>
         {resumeJsonData.COMPONENTS.map((item: IMATERIALITEM, index) => (
           <ModelItem
