@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input, Space, Button } from 'antd'
 
 const AntdTabs = styled(Tabs)`
@@ -18,38 +19,59 @@ type SkillSpecialtiesOptionsPropsType = {
 }
 
 const SkillSpecialtiesOptions: React.FC<SkillSpecialtiesOptionsPropsType> = ({ configShowStatus }) => {
-  const skillSpecialtiesOptionsStyleForm = useReactive({
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const skillSpecialtiesOptionsDataForm = useReactive({
-    title: '技能特长',
-    list: [
-      {
-        introduce: '熟练掌握该项技术1',
-      },
-      {
-        introduce: '熟练掌握该项技术2',
-      },
-      {
-        introduce: '熟练掌握该项技术3',
-      },
-      {
-        introduce: '熟练掌握该项技术4',
-      },
-    ],
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
+  // 更新模块数据
+  const handleChangeModelData = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'data',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 更新模块中的列表数据
+  const handleChangeModelListData = (index: number, key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 添加技能
+  const addSkill = () => {
+    dispatch(
+      pushResumeJsonModelListData({
+        cptKeyId,
+        value: {
+          skillName: 'JavaScript', // 技能名称
+          proficiency: '熟悉', // 熟练度
+          introduce: '熟练掌握该项技术', // 介绍
+        },
+      })
+    )
+  }
+
+  // 删除技能
+  const deleteSkill = (index: number) => {
+    dispatch(
+      deleteResumeJsonModelListData({
+        cptKeyId,
+        index,
+      })
+    )
   }
 
   return (
@@ -68,7 +90,7 @@ const SkillSpecialtiesOptions: React.FC<SkillSpecialtiesOptionsPropsType> = ({ c
               labelAlign='left'
             >
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={skillSpecialtiesOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -84,20 +106,25 @@ const SkillSpecialtiesOptions: React.FC<SkillSpecialtiesOptionsPropsType> = ({ c
             >
               <Form.Item label='标题名称'>
                 <Input
-                  value={skillSpecialtiesOptionsDataForm.title}
-                  onChange={e => (skillSpecialtiesOptionsDataForm.title = e.target.value)}
+                  value={modelItem.data.title}
+                  onChange={e => handleChangeModelData('title', e.target.value)}
                   size='small'
                   showCount
                   maxLength={15}
                 />
               </Form.Item>
 
-              {skillSpecialtiesOptionsDataForm.list.map((item, index) => (
+              {modelItem.data.LIST.map((item: any, index: number) => (
                 <Form.Item label={`技能${index + 1}`} key={index}>
                   <AntdSpace direction='horizontal'>
-                    <Input.TextArea rows={4} value={item.introduce} onChange={e => (item.introduce = e.target.value)} />
+                    <Input.TextArea
+                      rows={4}
+                      value={item.introduce}
+                      onChange={e => handleChangeModelListData(index, 'introduce', e.target.value)}
+                    />
                     <Button
                       disabled={index === 0}
+                      onClick={() => deleteSkill(index)}
                       className='f-c-c'
                       type='primary'
                       danger
@@ -106,7 +133,8 @@ const SkillSpecialtiesOptions: React.FC<SkillSpecialtiesOptionsPropsType> = ({ c
                       icon={<i className='i-ant-design-minus-outlined' />}
                     />
                     <Button
-                      disabled={index !== skillSpecialtiesOptionsDataForm.list.length - 1}
+                      disabled={index !== modelItem.data.LIST.length - 1}
+                      onClick={addSkill}
                       className='f-c-c'
                       type='primary'
                       shape='circle'
@@ -120,7 +148,6 @@ const SkillSpecialtiesOptions: React.FC<SkillSpecialtiesOptionsPropsType> = ({ c
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }
