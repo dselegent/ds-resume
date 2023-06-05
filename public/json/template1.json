@@ -81,7 +81,7 @@
 			{
 					"keyId": "dfb3f700-dab7-461b-93ac-08e6f5beca5b",
 					"model": "JOB_INTENTION",
-					"cptName": "JOB_INTENTION_3",
+					"cptName": "JOB_INTENTION_1",
 					"cptOptionsName": "JOB_INTENTION_OPTIONS",
 					"cptTitle": "求职意向",
 					"cptX": 0,
@@ -94,7 +94,7 @@
 					"style": {
 							"themeColor": "#079cfa",
 							"firstTitleFontSize": "20px",
-							"textColor": "#000000",
+							"textColor": "#757575",
 							"textFontSize": "14px",
 							"textFontWeight": 500,
 							"titleColor": "#121c26",
@@ -128,7 +128,7 @@
 			{
 					"keyId": "771953b7-65dd-4ec3-b571-1a8683906ad9",
 					"model": "EDU_BACKGROUND",
-					"cptName": "EDU_BACKGROUND_3",
+					"cptName": "EDU_BACKGROUND_1",
 					"cptOptionsName": "EDU_BACKGROUND_OPTIONS",
 					"cptTitle": "教育背景",
 					"cptX": 0,
@@ -141,17 +141,17 @@
 					"style": {
 							"themeColor": "#079cfa",
 							"firstTitleFontSize": "20px",
-							"textColor": "#000000",
+							"textColor": "#757575",
 							"textFontSize": "14px",
 							"textFontWeight": 500,
-							"titleColor": "#000000",
+							"titleColor": "#666",
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-education-1-copy",
@@ -191,7 +191,7 @@
 			{
 					"keyId": "dbcc9cbe-188e-4a49-a486-2ad4f23a030a",
 					"model": "SKILL_SPECIALTIES",
-					"cptName": "SKILL_SPECIALTIES_3",
+					"cptName": "SKILL_SPECIALTIES_1",
 					"cptOptionsName": "SKILL_SPECIALTIES_OPTIONS",
 					"cptTitle": "技能特长",
 					"cptX": 0,
@@ -211,11 +211,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-zhuanyezhishijineng",
@@ -249,7 +249,7 @@
 			{
 					"keyId": "8399cdc7-c624-4858-aafc-5cff711e6646",
 					"model": "CAMPUS_EXPERIENCE",
-					"cptName": "CAMPUS_EXPERIENCE_3",
+					"cptName": "CAMPUS_EXPERIENCE_1",
 					"cptOptionsName": "CAMPUS_EXPERIENCE_OPTIONS",
 					"cptTitle": "校园经历",
 					"cptX": 0,
@@ -269,11 +269,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-jiatimianban_timu",
@@ -311,7 +311,7 @@
 			{
 					"keyId": "940a00f9-925b-4451-9b9c-3678b3b6005c",
 					"model": "WORK_EXPERIENCE",
-					"cptName": "WORK_EXPERIENCE_3",
+					"cptName": "WORK_EXPERIENCE_1",
 					"cptOptionsName": "WORK_EXPERIENCE_OPTIONS",
 					"cptTitle": "工作经验",
 					"cptX": 0,
@@ -331,11 +331,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-gongzuojingyan",

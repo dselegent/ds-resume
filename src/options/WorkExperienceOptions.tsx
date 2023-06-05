@@ -1,5 +1,7 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input, Button, Space, Switch } from 'antd'
+import { cloneDeep } from 'lodash-es'
 
 const AntdTabs = styled(Tabs)`
   .ant-tabs-content {
@@ -19,56 +21,114 @@ type WorkExperienceOptionsPropsType = {
 }
 
 const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ configShowStatus }) => {
-  const workExperienceOptionsStyleForm = useReactive({
-    titleColor: '#000',
-    titleFontSize: '14px',
-    titleFontWeight: 600,
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const workExperienceOptionsDataForm = useReactive({
-    list: [
-      {
-        date: ['2020-09', '2024-06'],
-        companyName: '经历简要，如社团名称',
-        companyDuty: '主要职责',
-        jobContent: [
-          {
-            content: '主要工作内容是打杂',
-          },
-        ],
-      },
-      {
-        date: ['2020-09', '2024-06'],
-        companyName: '经历简要，如社团名称1',
-        companyDuty: '主要职责',
-        jobContent: [
-          {
-            content: '主要工作内容是打杂',
-          },
-          {
-            content: '主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂',
-          },
-        ],
-      },
-    ],
-    isShow: {
-      date: true,
-      companyName: true,
-      companyDuty: true,
-    },
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
+  // 更新模块中的列表数据
+  const handleChangeModelListData = (index: number, key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 更新工作内容列表
+  const handleChangeJobContentListData = (content: any, cIndex: number, index: number, key: string, value: any) => {
+    let jobContent = cloneDeep(content)
+    jobContent[cIndex].content = value
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value: jobContent,
+      })
+    )
+  }
+
+  // 更新模块内数据显示
+  const handleChangeModelShow = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'isShow',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 添加经历
+  const addWorkExp = () => {
+    dispatch(
+      pushResumeJsonModelListData({
+        cptKeyId,
+        value: {
+          date: ['2021-9', '2022-10'], // 实习时间
+          companyName: '业绩公司', // 公司名称
+          posts: '前端开发工程师', // 职位
+          jobContent: [
+            {
+              content: '主要工作内容是打杂',
+            },
+            {
+              content: '主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂',
+            },
+            {
+              content: '主要工作内容是打杂',
+            },
+          ],
+        },
+      })
+    )
+  }
+
+  // 删除经历
+  const deleteWorkExp = (index: number) => {
+    dispatch(
+      deleteResumeJsonModelListData({
+        cptKeyId,
+        index,
+      })
+    )
+  }
+
+  // 添加工作内容
+  const addJobcontent = (content: any, index: number, key: string) => {
+    let jobContent = cloneDeep(content)
+    jobContent.push({
+      content: '主要工作内容是打杂',
+    })
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value: jobContent,
+      })
+    )
+  }
+
+  // 删除工作内容
+  const deleteJobcontent = (content: any, cIndex: number, index: number, key: string) => {
+    let jobContent = cloneDeep(content)
+    jobContent.splice(cIndex, 1)
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value: jobContent,
+      })
+    )
   }
 
   return (
@@ -87,9 +147,9 @@ const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ confi
               labelAlign='left'
             >
               {/* 公共标题样式属性 */}
-              <CommonTitleOptions commonTitleOptionsStyleForm={workExperienceOptionsStyleForm} />
+              <CommonTitleOptions cptKeyId={cptKeyId} modelItem={modelItem} />
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={workExperienceOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -98,7 +158,7 @@ const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ confi
           label: '数据配置',
           children: (
             <>
-              {workExperienceOptionsDataForm.list.map((item, index) => (
+              {modelItem.data.LIST.map((item: any, index: number) => (
                 <Form
                   labelCol={{
                     span: configShowStatus ? 4 : 6,
@@ -110,6 +170,7 @@ const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ confi
                     <span className='mr-2.5 text-base font-500'>工作经验{index + 1}</span>
                     <Button
                       disabled={index === 0}
+                      onClick={() => deleteWorkExp(index)}
                       className='f-c-c'
                       type='primary'
                       danger
@@ -118,48 +179,58 @@ const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ confi
                       size='small'
                     />
                   </p>
-                  <DateFormItem item={item} isShow={workExperienceOptionsDataForm.isShow} />
+                  <DateFormItem
+                    item={item}
+                    isShow={modelItem.data.isShow.date}
+                    changeDate={(value: [string, string]) => handleChangeModelListData(index, 'date', value)}
+                    changeDateShow={(value: boolean) => handleChangeModelShow('date', value)}
+                  />
                   <Form.Item label='公司名称'>
                     <AntdSpace direction='horizontal'>
                       <Input
                         value={item.companyName}
-                        onChange={e => (item.companyName = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'companyName', e.target.value)}
                         size='small'
                         showCount
                         maxLength={35}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (workExperienceOptionsDataForm.isShow.companyName = value)}
-                        checked={workExperienceOptionsDataForm.isShow.companyName}
+                        onChange={(value: boolean) => handleChangeModelShow('companyName', value)}
+                        checked={modelItem.data.isShow.schoolName}
                       />
                     </AntdSpace>
                   </Form.Item>
                   <Form.Item label='主要职责'>
                     <AntdSpace direction='horizontal'>
                       <Input
-                        value={item.companyDuty}
-                        onChange={e => (item.companyDuty = e.target.value)}
+                        value={item.posts}
+                        onChange={e => handleChangeModelListData(index, 'posts', e.target.value)}
                         size='small'
                         showCount
                         maxLength={35}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (workExperienceOptionsDataForm.isShow.companyDuty = value)}
-                        checked={workExperienceOptionsDataForm.isShow.companyDuty}
+                        onChange={(value: boolean) => handleChangeModelShow('posts', value)}
+                        checked={modelItem.data.isShow.posts}
                       />
                     </AntdSpace>
                   </Form.Item>
-                  {item.jobContent.map((content, cIndex) => (
+                  {item.jobContent.map((content: any, cIndex: number) => (
                     <Form.Item label={`工作内容${cIndex + 1}`} key={cIndex}>
                       <AntdSpace direction='horizontal'>
                         <Input.TextArea
                           rows={6}
                           value={content.content}
-                          onChange={e => (content.content = e.target.value)}
+                          // onChange={e => (content.content = e.target.value)}
+                          onChange={e =>
+                            handleChangeJobContentListData(item.jobContent, cIndex, index, 'jobContent', e.target.value)
+                          }
                         />
                         <Button
+                          disabled={cIndex === 0}
+                          onClick={() => deleteJobcontent(item.jobContent, cIndex, index, 'jobContent')}
                           className='f-c-c'
                           type='primary'
                           danger
@@ -169,6 +240,7 @@ const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ confi
                         />
                         <Button
                           disabled={cIndex !== item.jobContent.length - 1}
+                          onClick={() => addJobcontent(item.jobContent, index, 'jobContent')}
                           className='f-c-c'
                           type='primary'
                           shape='circle'
@@ -180,14 +252,13 @@ const WorkExperienceOptions: React.FC<WorkExperienceOptionsPropsType> = ({ confi
                   ))}
                 </Form>
               ))}
-              <Button className='mt-3' type='primary' size='small'>
+              <Button className='mt-3' type='primary' size='small' onClick={addWorkExp}>
                 添加经历
               </Button>
             </>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }
