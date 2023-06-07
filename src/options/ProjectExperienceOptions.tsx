@@ -1,5 +1,7 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input, Button, Space, Switch } from 'antd'
+import { cloneDeep } from 'lodash-es'
 
 const AntdTabs = styled(Tabs)`
   .ant-tabs-content {
@@ -19,56 +21,115 @@ type ProjectExperienceOptionsPropsType = {
 }
 
 const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({ configShowStatus }) => {
-  const projectExperienceOptionsStyleForm = useReactive({
-    titleColor: '#000',
-    titleFontSize: '14px',
-    titleFontWeight: 600,
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const projectExperienceOptionsDataForm = useReactive({
-    list: [
-      {
-        date: ['2020-09', '2024-06'],
-        projectName: '项目名称',
-        projectDuty: '主要职责',
-        projectContent: [
-          {
-            content: '该项目是一个打杂项目',
-          },
-        ],
-      },
-      {
-        date: ['2020-09', '2024-06'],
-        projectName: '项目名称2',
-        projectDuty: '主要职责',
-        projectContent: [
-          {
-            content: '该项目是一个打杂项目',
-          },
-          {
-            content: '该项目是一个打杂项目该项目是一个打杂项目该项目是一个打杂项目该项目是一个打杂项目',
-          },
-        ],
-      },
-    ],
-    isShow: {
-      date: true,
-      projectName: true,
-      projectDuty: true,
-    },
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
+  // 更新模块中的列表数据
+  const handleChangeModelListData = (index: number, key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 更新项目内容列表
+  const handleChangeJobContentListData = (content: any, cIndex: number, index: number, key: string, value: any) => {
+    let projectContent = cloneDeep(content)
+    projectContent[cIndex].content = value
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value: projectContent,
+      })
+    )
+  }
+
+  // 更新模块内数据显示
+  const handleChangeModelShow = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'isShow',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 添加项目
+  const addProject = () => {
+    dispatch(
+      pushResumeJsonModelListData({
+        cptKeyId,
+        value: {
+          date: ['2021-9', '2022-10'], // 实习时间
+          projectName: 'xxx', // 公司名称
+          projectContent: [
+            {
+              content: '主要工作内容是打杂',
+            },
+            {
+              content: '主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂主要工作内容是打杂',
+            },
+            {
+              content: '主要工作内容是打杂',
+            },
+          ],
+        },
+      })
+    )
+  }
+
+  // 删除项目
+  const deleteProject = (index: number) => {
+    dispatch(
+      deleteResumeJsonModelListData({
+        cptKeyId,
+        index,
+      })
+    )
+  }
+
+  // 添加项目内容
+  const addProjectContent = (content: any, index: number, key: string) => {
+    let projectContent = cloneDeep(content)
+    console.log(projectContent)
+
+    projectContent.push({
+      content: '主要工作内容是打杂',
+    })
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value: projectContent,
+      })
+    )
+  }
+
+  // 删除项目内容
+  const deleteProjectContent = (content: any, cIndex: number, index: number, key: string) => {
+    let projectContent = cloneDeep(content)
+    projectContent.splice(cIndex, 1)
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value: projectContent,
+      })
+    )
   }
 
   return (
@@ -87,9 +148,9 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
               labelAlign='left'
             >
               {/* 公共标题样式属性 */}
-              <CommonTitleOptions commonTitleOptionsStyleForm={projectExperienceOptionsStyleForm} />
+              <CommonTitleOptions cptKeyId={cptKeyId} modelItem={modelItem} />
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={projectExperienceOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -98,7 +159,7 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
           label: '数据配置',
           children: (
             <>
-              {projectExperienceOptionsDataForm.list.map((item, index) => (
+              {modelItem.data.LIST.map((item: any, index: number) => (
                 <Form
                   labelCol={{
                     span: configShowStatus ? 4 : 6,
@@ -110,6 +171,7 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
                     <span className='mr-2.5 text-base font-500'>项目经验{index + 1}</span>
                     <Button
                       disabled={index === 0}
+                      onClick={() => deleteProject(index)}
                       className='f-c-c'
                       type='primary'
                       danger
@@ -118,24 +180,29 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
                       size='small'
                     />
                   </p>
-                  <DateFormItem item={item} isShow={projectExperienceOptionsDataForm.isShow} />
+                  <DateFormItem
+                    item={item}
+                    isShow={modelItem.data.isShow.date}
+                    changeDate={(value: [string, string]) => handleChangeModelListData(index, 'date', value)}
+                    changeDateShow={(value: boolean) => handleChangeModelShow('date', value)}
+                  />
                   <Form.Item label='项目名称'>
                     <AntdSpace direction='horizontal'>
                       <Input
                         value={item.projectName}
-                        onChange={e => (item.projectName = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'companyName', e.target.value)}
                         size='small'
                         showCount
                         maxLength={35}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (projectExperienceOptionsDataForm.isShow.projectName = value)}
-                        checked={projectExperienceOptionsDataForm.isShow.projectName}
+                        onChange={(value: boolean) => handleChangeModelShow('projectName', value)}
+                        checked={modelItem.data.isShow.projectName}
                       />
                     </AntdSpace>
                   </Form.Item>
-                  <Form.Item label='主要职责'>
+                  {/* <Form.Item label='主要职责'>
                     <AntdSpace direction='horizontal'>
                       <Input
                         value={item.projectDuty}
@@ -150,17 +217,27 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
                         checked={projectExperienceOptionsDataForm.isShow.projectDuty}
                       />
                     </AntdSpace>
-                  </Form.Item>
-                  {item.projectContent.map((content, cIndex) => (
+                  </Form.Item> */}
+                  {item.projectContent.map((content: any, cIndex: number) => (
                     <Form.Item label={`项目内容${cIndex + 1}`} key={cIndex}>
                       <AntdSpace direction='horizontal'>
                         <Input.TextArea
                           rows={6}
                           value={content.content}
-                          onChange={e => (content.content = e.target.value)}
+                          onChange={e =>
+                            handleChangeJobContentListData(
+                              item.projectContent,
+                              cIndex,
+                              index,
+                              'projectContent',
+                              e.target.value
+                            )
+                          }
                         />
                         <Button
+                          disabled={cIndex === 0}
                           className='f-c-c'
+                          onClick={() => deleteProjectContent(item.projectContent, cIndex, index, 'projectContent')}
                           type='primary'
                           danger
                           shape='circle'
@@ -169,6 +246,7 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
                         />
                         <Button
                           disabled={cIndex !== item.projectContent.length - 1}
+                          onClick={() => addProjectContent(item.projectContent, index, 'projectContent')}
                           className='f-c-c'
                           type='primary'
                           shape='circle'
@@ -180,14 +258,13 @@ const ProjectExperienceOptions: React.FC<ProjectExperienceOptionsPropsType> = ({
                   ))}
                 </Form>
               ))}
-              <Button className='mt-3' type='primary' size='small'>
+              <Button className='mt-3' type='primary' size='small' onClick={addProject}>
                 添加项目
               </Button>
             </>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }
