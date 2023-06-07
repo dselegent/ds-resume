@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input, Button, Space, Switch, DatePicker } from 'antd'
 import dayjs from 'dayjs/esm'
 
@@ -24,40 +25,58 @@ type AwardsOptionsPropsType = {
 }
 
 const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) => {
-  const awardsOptionsStyleForm = useReactive({
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const awardsOptionsDataForm = useReactive({
-    list: [
-      {
-        date: '2020-09',
-        awardsName: '奖项名称',
-        awardsGrade: '所获奖项',
-      },
-      {
-        date: '2020-09',
-        awardsName: '项目名称2',
-        awardsGrade: '所获奖项',
-      },
-    ],
-    isShow: {
-      date: true,
-      awardsName: true,
-      awardsGrade: true,
-    },
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
+  // 更新模块中的列表数据
+  const handleChangeModelListData = (index: number, key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 更新模块内数据显示
+  const handleChangeModelShow = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'isShow',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 添加奖项
+  const addAwards = (): void => {
+    dispatch(
+      pushResumeJsonModelListData({
+        cptKeyId,
+        value: {
+          date: '2021-9', // 获奖时间
+          awardsName: '奖项名称',
+          awardsGrade: '获奖等级',
+        },
+      })
+    )
+  }
+  // 删除奖项
+  const deleteAwards = (index: number): void => {
+    dispatch(
+      deleteResumeJsonModelListData({
+        cptKeyId,
+        index,
+      })
+    )
   }
 
   return (
@@ -76,7 +95,7 @@ const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) =
               labelAlign='left'
             >
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={awardsOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -85,7 +104,7 @@ const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) =
           label: '数据配置',
           children: (
             <>
-              {awardsOptionsDataForm.list.map((item, index) => (
+              {modelItem.data.LIST.map((item: any, index: number) => (
                 <Form
                   labelCol={{
                     span: configShowStatus ? 4 : 6,
@@ -97,6 +116,7 @@ const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) =
                     <span className='mr-2.5 text-base font-500'>奖项{index + 1}</span>
                     <Button
                       disabled={index === 0}
+                      onClick={() => deleteAwards(index)}
                       className='f-c-c'
                       type='primary'
                       danger
@@ -112,12 +132,12 @@ const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) =
                         picker='month'
                         size='small'
                         value={dayjs(item.date, 'YYYY-MM')}
-                        onChange={(date, dateString) => (item.date = dateString)}
+                        onChange={(date, dateString) => handleChangeModelListData(index, 'date', dateString)}
                       />
                       <Switch
                         size='small'
-                        checked={awardsOptionsDataForm.isShow.date}
-                        onChange={(value: boolean) => (awardsOptionsDataForm.isShow.date = value)}
+                        onChange={(value: boolean) => handleChangeModelShow('date', value)}
+                        checked={modelItem.data.isShow.date}
                       />
                     </AntdSpace>
                   </Form.Item>
@@ -125,15 +145,15 @@ const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) =
                     <AntdSpace direction='horizontal'>
                       <Input
                         value={item.awardsName}
-                        onChange={e => (item.awardsName = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'awardsName', e.target.value)}
                         size='small'
                         showCount
                         maxLength={35}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (awardsOptionsDataForm.isShow.awardsName = value)}
-                        checked={awardsOptionsDataForm.isShow.awardsName}
+                        onChange={(value: boolean) => handleChangeModelShow('awardsName', value)}
+                        checked={modelItem.data.isShow.awardsName}
                       />
                     </AntdSpace>
                   </Form.Item>
@@ -142,25 +162,24 @@ const AwardsOptions: React.FC<AwardsOptionsPropsType> = ({ configShowStatus }) =
                       <Input.TextArea
                         rows={4}
                         value={item.awardsGrade}
-                        onChange={e => (item.awardsGrade = e.target.value)}
+                        onChange={e => handleChangeModelListData(index, 'awardsGrade', e.target.value)}
                       />
                       <Switch
                         size='small'
-                        onChange={(value: boolean) => (awardsOptionsDataForm.isShow.awardsGrade = value)}
-                        checked={awardsOptionsDataForm.isShow.awardsGrade}
+                        onChange={(value: boolean) => handleChangeModelShow('awardsGrade', value)}
+                        checked={modelItem.data.isShow.awardsGrade}
                       />
                     </AntdSpace>
                   </Form.Item>
                 </Form>
               ))}
-              <Button className='mt-3' type='primary' size='small'>
+              <Button className='mt-3' type='primary' size='small' onClick={addAwards}>
                 添加奖项
               </Button>
             </>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }

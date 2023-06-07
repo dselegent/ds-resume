@@ -6,6 +6,7 @@ import SkillSpecialties1 from '@/material/SkillSpecialties/SkillSpecialties1'
 import CampusExperience1 from '@/material/CampusExperience/CampusExperience1'
 import WorkExperience1 from '@/material/WorkExperience/WorkExperience1'
 import ProjectExperience1 from '@/material/ProjectExperience/ProjectExperience1'
+import Awards1 from '@/material/Awards/Awards1'
 import { Tooltip } from 'antd'
 
 const ModelBox: React.FC = () => {
@@ -196,7 +197,7 @@ const ModelBox: React.FC = () => {
           />
         </section>
       )}
-      {/* 6 */}
+      {/* 7 */}
       {resumeJsonData.COMPONENTS[6].show && (
         <section
           className='relative border border-transparent border-dashed transition-base'
@@ -223,6 +224,36 @@ const ModelBox: React.FC = () => {
             className={'border border-transparent border-dashed relative hover:cursor-move hover:border-primary'}
             modelData={resumeJsonData.COMPONENTS[6].data}
             modelStyle={resumeJsonData.COMPONENTS[6].style}
+          />
+        </section>
+      )}
+      {/* 7 */}
+      {resumeJsonData.COMPONENTS[7].show && (
+        <section
+          className='relative border border-transparent border-dashed transition-base'
+          // onMouseOver={() => setHoverId(resumeJsonData.COMPONENTS[0].keyId)}
+          // onMouseOut={() => setHoverId('')}
+          // onFocus={() => void 0}
+          // onBlur={() => void 0}
+        >
+          {/* 模块操作区域 */}
+          <aside
+            className={`absolute right-0 -top-8 ${
+              hoverId === resumeJsonData.COMPONENTS[7].keyId ? 'block' : 'display-none'
+            }`}
+          >
+            <Tooltip title='删除当前模块' placement='bottom'>
+              <div className='h-8 w-8 f-c-c cursor-pointer rounded bg-emerald-500 hover:bg-emerald-400'>
+                <i className='i-ant-design-delete-outlined text-xl text-white'></i>
+              </div>
+            </Tooltip>
+          </aside>
+          {/* 物料渲染 */}
+          <DynamicComponent
+            is={Awards1}
+            className={'border border-transparent border-dashed relative hover:cursor-move hover:border-primary'}
+            modelData={resumeJsonData.COMPONENTS[7].data}
+            modelStyle={resumeJsonData.COMPONENTS[7].style}
           />
         </section>
       )}

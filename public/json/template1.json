@@ -442,7 +442,7 @@
 			{
 					"keyId": "97bfd4ac-f141-49b1-96de-b15272ea9f07",
 					"model": "AWARDS",
-					"cptName": "AWARDS_3",
+					"cptName": "AWARDS_1",
 					"cptOptionsName": "AWARDS_OPTIONS",
 					"cptTitle": "荣誉奖项",
 					"cptX": 0,
@@ -462,11 +462,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-rongyu1",
