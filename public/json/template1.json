@@ -534,7 +534,7 @@
 			{
 					"keyId": "987bfb09-31e7-4a67-9305-d1138bc6bef2",
 					"model": "SELF_EVALUATION",
-					"cptName": "SELF_EVALUATION_3",
+					"cptName": "SELF_EVALUATION_1",
 					"cptOptionsName": "SELF_EVALUATION_OPTIONS",
 					"cptTitle": "自我评价",
 					"cptX": 0,
@@ -554,11 +554,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-ziwopingjia",

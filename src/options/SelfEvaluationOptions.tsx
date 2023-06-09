@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input } from 'antd'
 
 const AntdTabs = styled(Tabs)`
@@ -12,26 +13,25 @@ type SelfEvaluationOptionsPropsType = {
 }
 
 const SelfEvaluationOptions: React.FC<SelfEvaluationOptionsPropsType> = ({ configShowStatus }) => {
-  const selfEvaluationOptionsStyleForm = useReactive({
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const selfEvaluationOptionsDataForm = useReactive({
-    title: '自我评价',
-    content: '我喜欢打杂',
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
-  }
+  // 更新模块数据
+  const handleChangeModelData = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'data',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
 
   return (
     <AntdTabs
@@ -49,7 +49,7 @@ const SelfEvaluationOptions: React.FC<SelfEvaluationOptionsPropsType> = ({ confi
               labelAlign='left'
             >
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={selfEvaluationOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -65,25 +65,24 @@ const SelfEvaluationOptions: React.FC<SelfEvaluationOptionsPropsType> = ({ confi
             >
               <Form.Item label='标题名称'>
                 <Input
-                  value={selfEvaluationOptionsDataForm.title}
-                  onChange={e => (selfEvaluationOptionsDataForm.title = e.target.value)}
+                  value={modelItem.data.title}
+                  onChange={e => handleChangeModelData('title', e.target.value)}
                   size='small'
                   showCount
                   maxLength={15}
                 />
               </Form.Item>
-              <Form.Item label='兴趣爱好'>
+              <Form.Item label='自我评价'>
                 <Input.TextArea
                   rows={4}
-                  value={selfEvaluationOptionsDataForm.content}
-                  onChange={e => (selfEvaluationOptionsDataForm.content = e.target.value)}
+                  value={modelItem.data.content}
+                  onChange={e => handleChangeModelData('content', e.target.value)}
                 />
               </Form.Item>
             </Form>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }
