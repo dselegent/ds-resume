@@ -13,33 +13,47 @@ type WorksDisplayOptionsPropsType = {
 }
 
 const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configShowStatus }) => {
-  const worksDisplayOptionsStyleForm = useReactive({
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const worksDisplayOptionsDataForm = useReactive({
-    list: [
-      {
-        worksName: '作品名称',
-        worksLink: 'https://www.baidu.com',
-      },
-      {
-        worksName: '作品名称',
-        worksLink: 'https://www.baidu.com',
-      },
-    ],
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
+  // 更新模块中的列表数据
+  const handleChangeModelListData = (index: number, key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: index,
+        cptKeyId,
+        key,
+        value,
+      })
+    )
+
+  // 添加奖项
+  const addWorks = (): void => {
+    dispatch(
+      pushResumeJsonModelListData({
+        cptKeyId,
+        value: {
+          worksName: '作品名称',
+          worksLink: 'https://www.baidu.com',
+          worksIntroduce: '这是一个千万级作品',
+        },
+      })
+    )
+  }
+  // 删除奖项
+  const deleteWorks = (index: number): void => {
+    dispatch(
+      deleteResumeJsonModelListData({
+        cptKeyId,
+        index,
+      })
+    )
   }
 
   return (
@@ -58,7 +72,7 @@ const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configSho
               labelAlign='left'
             >
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={worksDisplayOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -67,7 +81,7 @@ const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configSho
           label: '数据配置',
           children: (
             <>
-              {worksDisplayOptionsDataForm.list.map((item, index) => (
+              {modelItem.data.LIST.map((item: any, index: number) => (
                 <Form
                   labelCol={{
                     span: configShowStatus ? 4 : 6,
@@ -79,6 +93,7 @@ const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configSho
                     <span className='mr-2.5 text-base font-500'>作品{index + 1}</span>
                     <Button
                       disabled={index === 0}
+                      onClick={() => deleteWorks(index)}
                       className='f-c-c'
                       type='primary'
                       danger
@@ -90,7 +105,7 @@ const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configSho
                   <Form.Item label='作品名称'>
                     <Input
                       value={item.worksName}
-                      onChange={e => (item.worksName = e.target.value)}
+                      onChange={e => handleChangeModelListData(index, 'wordsName', e.target.value)}
                       size='small'
                       showCount
                       maxLength={35}
@@ -99,7 +114,7 @@ const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configSho
                   <Form.Item label='作品链接'>
                     <Input
                       value={item.worksLink}
-                      onChange={e => (item.worksLink = e.target.value)}
+                      onChange={e => handleChangeModelListData(index, 'worksLink', e.target.value)}
                       size='small'
                       showCount
                       maxLength={235}
@@ -107,14 +122,13 @@ const WorksDisplayOptions: React.FC<WorksDisplayOptionsPropsType> = ({ configSho
                   </Form.Item>
                 </Form>
               ))}
-              <Button className='mt-3' type='primary' size='small'>
+              <Button className='mt-3' type='primary' size='small' onClick={addWorks}>
                 添加作品
               </Button>
             </>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }

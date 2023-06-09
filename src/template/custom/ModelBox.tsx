@@ -9,6 +9,7 @@ import ProjectExperience1 from '@/material/ProjectExperience/ProjectExperience1'
 import Awards1 from '@/material/Awards/Awards1'
 import Hobbies1 from '@/material/Hobbies/Hobbies1'
 import SelfEvaluation1 from '@/material/SelfEvaluation/SelfEvaluation1'
+import WorksDisplay1 from '@/material/WorksDisplay/WorksDisplay1'
 import { Tooltip } from 'antd'
 
 const ModelBox: React.FC = () => {
@@ -316,6 +317,36 @@ const ModelBox: React.FC = () => {
             className={'border border-transparent border-dashed relative hover:cursor-move hover:border-primary'}
             modelData={resumeJsonData.COMPONENTS[9].data}
             modelStyle={resumeJsonData.COMPONENTS[9].style}
+          />
+        </section>
+      )}
+      {/* 11 */}
+      {resumeJsonData.COMPONENTS[10].show && (
+        <section
+          className='relative border border-transparent border-dashed transition-base'
+          // onMouseOver={() => setHoverId(resumeJsonData.COMPONENTS[0].keyId)}
+          // onMouseOut={() => setHoverId('')}
+          // onFocus={() => void 0}
+          // onBlur={() => void 0}
+        >
+          {/* 模块操作区域 */}
+          <aside
+            className={`absolute right-0 -top-8 ${
+              hoverId === resumeJsonData.COMPONENTS[10].keyId ? 'block' : 'display-none'
+            }`}
+          >
+            <Tooltip title='删除当前模块' placement='bottom'>
+              <div className='h-8 w-8 f-c-c cursor-pointer rounded bg-emerald-500 hover:bg-emerald-400'>
+                <i className='i-ant-design-delete-outlined text-xl text-white'></i>
+              </div>
+            </Tooltip>
+          </aside>
+          {/* 物料渲染 */}
+          <DynamicComponent
+            is={WorksDisplay1}
+            className={'border border-transparent border-dashed relative hover:cursor-move hover:border-primary'}
+            modelData={resumeJsonData.COMPONENTS[10].data}
+            modelStyle={resumeJsonData.COMPONENTS[10].style}
           />
         </section>
       )}

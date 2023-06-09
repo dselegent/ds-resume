@@ -571,9 +571,9 @@
 			{
 					"keyId": "e669991a-e2cc-4557-bcf1-14000624ccf5",
 					"model": "WORKS_DISPLAY",
-					"cptName": "WORKS_DISPLAY_3",
+					"cptName": "WORKS_DISPLAY_1",
 					"cptOptionsName": "WORKS_DISPLAY_OPTIONS",
-					"cptTitle": "作评展示",
+					"cptTitle": "作品展示",
 					"cptX": 0,
 					"cptY": 0,
 					"cptZ": 0,
@@ -591,11 +591,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-zhuanyezhishijineng",
