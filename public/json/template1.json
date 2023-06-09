@@ -490,7 +490,7 @@
 			{
 					"keyId": "0ae03905-f823-4667-83cb-9ff79d6b608d",
 					"model": "HOBBIES",
-					"cptName": "HOBBIES_3",
+					"cptName": "HOBBIES_1",
 					"cptOptionsName": "HOBBIES_OPTIONS",
 					"cptTitle": "兴趣爱好",
 					"cptX": 0,
@@ -510,11 +510,11 @@
 							"titleFontSize": "14px",
 							"titleFontWeight": 600,
 							"backgroundColor": "#000",
-							"pLeftRight": "50px",
-							"pTop": "0",
-							"pBottom": "30px",
-							"mBottom": "0",
-							"mTop": "0px"
+							"pLeftRight": 50,
+							"pTop": 0,
+							"pBottom": 30,
+							"mBottom": 0,
+							"mTop": 0
 					},
 					"data": {
 							"iconfont": "icon-xingquaihao",

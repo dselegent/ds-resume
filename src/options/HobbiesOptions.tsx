@@ -1,4 +1,5 @@
 import React from 'react'
+import type { IMATERIALITEM } from '@/interface/material'
 import { Tabs, Form, Input } from 'antd'
 
 const AntdTabs = styled(Tabs)`
@@ -12,26 +13,25 @@ type HobbiesOptionsPropsType = {
 }
 
 const HobbiesOptions: React.FC<HobbiesOptionsPropsType> = ({ configShowStatus }) => {
-  const hobbiesOptionsStyleForm = useReactive({
-    textColor: '#000',
-    textFontSize: '14px',
-    textFontWeight: 500,
-    countModel: false,
-    marginTop: 0,
-    marginBottom: 0,
-    paddingTop: 45,
-    paddingBottom: 55,
-    paddingX: 50,
-  })
+  const dispatch = useAppDispatch()
 
-  const hobbiesOptionsDataForm = useReactive({
-    title: '兴趣爱好',
-    content: '我喜欢打杂',
-  })
+  // 选中的模块id
+  const cptKeyId = useAppSelector(selectorSelectMaterial).cptKeyId
+  // 选中的模块数据
+  const modelItem = useAppSelector(selectorResumeJsonData).COMPONENTS.find(
+    (item: IMATERIALITEM) => item.keyId === cptKeyId
+  )
 
-  const onChange = (key: string) => {
-    console.log(key)
-  }
+  // 更新模块数据
+  const handleChangeModelData = (key: string, value: any) =>
+    dispatch(
+      changeResumeJsonModelData({
+        flag: 'data',
+        cptKeyId,
+        key,
+        value,
+      })
+    )
 
   return (
     <AntdTabs
@@ -49,7 +49,7 @@ const HobbiesOptions: React.FC<HobbiesOptionsPropsType> = ({ configShowStatus })
               labelAlign='left'
             >
               {/* 公共样式属性 */}
-              <CommonOptions commonOptionsStyleForm={hobbiesOptionsStyleForm} />
+              <CommonOptions cptKeyId={cptKeyId} modelItem={modelItem} />
             </Form>
           ),
         },
@@ -65,8 +65,8 @@ const HobbiesOptions: React.FC<HobbiesOptionsPropsType> = ({ configShowStatus })
             >
               <Form.Item label='标题名称'>
                 <Input
-                  value={hobbiesOptionsDataForm.title}
-                  onChange={e => (hobbiesOptionsDataForm.title = e.target.value)}
+                  value={modelItem.data.title}
+                  onChange={e => handleChangeModelData('title', e.target.value)}
                   size='small'
                   showCount
                   maxLength={15}
@@ -75,15 +75,14 @@ const HobbiesOptions: React.FC<HobbiesOptionsPropsType> = ({ configShowStatus })
               <Form.Item label='兴趣爱好'>
                 <Input.TextArea
                   rows={4}
-                  value={hobbiesOptionsDataForm.content}
-                  onChange={e => (hobbiesOptionsDataForm.content = e.target.value)}
+                  value={modelItem.data.content}
+                  onChange={e => handleChangeModelData('content', e.target.value)}
                 />
               </Form.Item>
             </Form>
           ),
         },
       ]}
-      onChange={onChange}
     />
   )
 }
