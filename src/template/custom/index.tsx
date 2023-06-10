@@ -1,4 +1,5 @@
 import React from 'react'
+import MaterialComponents from '@/utils/registerMaterialCom' // 所有物料组件
 import ModelBox from './ModelBox'
 
 const Custom: React.FC = () => {
@@ -9,9 +10,11 @@ const Custom: React.FC = () => {
     <section>
       {resumeJsonData.LAYOUT === 'classical' && (
         <div className='box-border min-h-290 min-w-205 w-205 bg-white'>
-          <div className='list-group-item'>
-            <ModelBox />
-          </div>
+          {resumeJsonData.COMPONENTS.map((item: any, index: number) => (
+            <div className='list-group-item' key={index}>
+              <ModelBox components={MaterialComponents} item={item} />
+            </div>
+          ))}
         </div>
       )}
     </section>
