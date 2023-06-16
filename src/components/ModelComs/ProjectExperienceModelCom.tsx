@@ -112,7 +112,7 @@ const ProjectExperienceModelCom: React.FC<ProjectExperienceModelComPropsType> = 
             </div>
             {/* 简述 */}
             <ProjectContent {...modelStyle} className='flex'>
-              <p className='left w-1/5 letter-2'>工作内容</p>
+              <p className='left w-1/5 letter-2'>项目内容</p>
               <div className='flex-1'>
                 <ul className='flex-col'>
                   {item.projectContent.map((list, j) => (
