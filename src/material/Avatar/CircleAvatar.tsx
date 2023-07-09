@@ -23,7 +23,7 @@ const CircleAvatar: React.FC<CircleAvatarPropsType> = ({ width = '115px', height
     <CircleAvatarBox
       width={width}
       height={height}
-      className='f-c-c cursor-pointer overflow-hidden border-3 border-slate-100 rounded-full border-solid'
+      className='f-c-c cursor-pointer overflow-hidden border-4 border-slate-300 rounded-full border-solid'
     >
       {modelData?.avatar ? (
         <Image

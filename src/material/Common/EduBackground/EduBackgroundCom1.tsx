@@ -2,33 +2,6 @@ import React from 'react'
 import type { IEDUBACKGROUND } from '@/interface/model'
 import type { IMODELSTYLE } from '@/interface/modelStyle'
 
-const EduBackground = styled.section<{
-  mTop: number
-  mBottom: number
-  pTop: number
-  pBottom: number
-  pLeftRight: number
-  themeColor: string
-}>`
-  &::before {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 100%;
-    background-color: ${props => props.themeColor};
-    left: 35px;
-    top: 5px;
-  }
-  ${props => ({
-    marginTop: props.mTop + 'px',
-    marginBottom: props.mBottom + 'px',
-    paddingTop: props.pTop + 'px',
-    paddingBottom: props.pBottom + 'px',
-    paddingLeft: props.pLeftRight + 'px',
-    paddingRight: props.pLeftRight + 'px',
-  })}
-`
-
 const DateSchoolBox = styled.div<{
   titleFontSize: string
   titleColor: string
@@ -53,21 +26,18 @@ const Describe = styled.p<{
   })}
 `
 
-type EduBackgroundModelComPropsType = {
-  children: React.ReactNode
+type EduBackgroundCom1PropsType = {
   modelData: IEDUBACKGROUND // 模块数据
   modelStyle: IMODELSTYLE // 模块样式
 }
 
-const EduBackgroundModelCom: React.FC<EduBackgroundModelComPropsType> = ({ children, modelData, modelStyle }) => {
+const EduBackgroundCom1: React.FC<EduBackgroundCom1PropsType> = ({ modelData, modelStyle }) => {
   return (
-    <EduBackground {...modelStyle} className='relative box-border'>
-      {/* 标题 */}
-      {children}
-      {/* 教学鳖精 */}
+    <section className='eduBackgroundContent box-border'>
+      {/* 教学背景 */}
       <div className='w-full flex-col'>
         {modelData.LIST.map((item, index) => (
-          <div className='mt-5 w-full f-b-c flex-col' key={index}>
+          <div className='box-border w-full f-b-c flex-col pb-1 pt-4' key={index}>
             {/* 日期和学校 */}
             <DateSchoolBox {...modelStyle} className='mb-2 w-full flex justify-between letter-2 first:min-w-41'>
               {modelData.isShow.date && <span>{item.date.join('-')}</span>}
@@ -89,8 +59,8 @@ const EduBackgroundModelCom: React.FC<EduBackgroundModelComPropsType> = ({ child
           </div>
         ))}
       </div>
-    </EduBackground>
+    </section>
   )
 }
 
-export default EduBackgroundModelCom
+export default EduBackgroundCom1

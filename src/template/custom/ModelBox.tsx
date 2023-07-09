@@ -5,6 +5,10 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import type { Transform } from '@dnd-kit/utilities'
 
+const Placeholder: React.FC = () => {
+  return <div>Placeholder</div>
+}
+
 type ModelBoxPropsType = {
   components: any
   item: IMATERIALITEM
@@ -25,9 +29,6 @@ const ModelBox: React.FC<ModelBoxPropsType> = ({ components, item, id }) => {
     id,
   })
 
-  // // 选中的模块数据
-  const selectMaterial = useAppSelector(selectorSelectMaterial)
-
   // 移入的组件id
   const [hoverId, setHoverId] = useSafeState('')
 
@@ -38,9 +39,8 @@ const ModelBox: React.FC<ModelBoxPropsType> = ({ components, item, id }) => {
       transition={transition}
       {...attributes}
       {...listeners}
-      // className={'f-b-c border border-transparent border-dashed px-3 cursor-row-resize	hover:border-primary'}
       style={{
-        background: selectMaterial.cptKeyId === item.keyId ? 'rgba(227, 231, 234, 0.6)' : '',
+        background: hoverId === item.keyId ? 'rgba(227, 231, 234, 0.6)' : '',
       }}
     >
       {item.show && (
@@ -61,7 +61,7 @@ const ModelBox: React.FC<ModelBoxPropsType> = ({ components, item, id }) => {
           </aside>
           {/* 物料渲染 */}
           <DynamicComponent
-            is={components[item.cptName]}
+            is={components[item.cptName] ? components[item.cptName] : Placeholder}
             className={'border border-transparent border-dashed relative hover:cursor-move hover:border-primary'}
             modelData={item.data}
             modelStyle={item.style}

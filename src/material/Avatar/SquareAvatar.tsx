@@ -22,7 +22,7 @@ const SquareAvatar: React.FC<SquareAvatarPropsType> = ({ width = '120px', height
     <SquareAvatarBox
       width={width}
       height={height}
-      className='f-c-c cursor-pointer overflow-hidden border-3 border-slate-100 rounded border-solid'
+      className='f-c-c cursor-pointer overflow-hidden border-4 border-slate-300 rounded border-solid'
     >
       {modelData?.avatar ? (
         <Image

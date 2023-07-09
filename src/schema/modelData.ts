@@ -10,7 +10,7 @@ const MODEL_DATA_JSON: IMODELDATAJSON = {
     age: 21,
     address: '湖南长沙', // 所在地址
     avatar: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg', // 头像地址
-    avatarShape: 'SQUARE_AVATAR',
+    avatarShape: 'RECTANGLE_AVATAR',
     workService: 3, // 工作年限
     phoneNumber: '028-1234321', // 联系电话
     email: '12322233@qq.com', // 邮箱

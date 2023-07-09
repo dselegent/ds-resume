@@ -2,33 +2,6 @@ import React from 'react'
 import type { IWORKSDISPLAY } from '@/interface/model'
 import type { IMODELSTYLE } from '@/interface/modelStyle'
 
-const WorksDisplay = styled.section<{
-  mTop: number
-  mBottom: number
-  pTop: number
-  pBottom: number
-  pLeftRight: number
-  themeColor: string
-}>`
-  &::before {
-    content: '';
-    position: absolute;
-    width: 1px;
-    height: 100%;
-    background-color: ${props => props.themeColor};
-    left: 35px;
-    top: 5px;
-  }
-  ${props => ({
-    marginTop: props.mTop + 'px',
-    marginBottom: props.mBottom + 'px',
-    paddingTop: props.pTop + 'px',
-    paddingBottom: props.pBottom + 'px',
-    paddingLeft: props.pLeftRight + 'px',
-    paddingRight: props.pLeftRight + 'px',
-  })}
-`
-
 const WorksDisplayItem = styled.li<{
   textFontSize: string
   textColor: string
@@ -47,19 +20,16 @@ const WorksDisplayItem = styled.li<{
   }
 `
 
-type WorksDisplayModelComPropsType = {
-  children: React.ReactNode
+type WorksDisplayCom1PropsType = {
   modelData: IWORKSDISPLAY // 模块数据
   modelStyle: IMODELSTYLE // 模块样式
 }
 
-const WorksDisplayModelCom: React.FC<WorksDisplayModelComPropsType> = ({ children, modelData, modelStyle }) => {
+const WorksDisplayCom1: React.FC<WorksDisplayCom1PropsType> = ({ modelData, modelStyle }) => {
   return (
-    <WorksDisplay {...modelStyle} className='relative box-border'>
-      {/* 标题 */}
-      {children}
+    <section className='workDisplayContent box-border'>
       {/* 作品展示 */}
-      <ul className='mt-5 flex-col'>
+      <ul className='workDisplayList box-border flex-col items-start pt-4'>
         {modelData.LIST.map((item: any, index: number) => (
           <WorksDisplayItem {...modelStyle} key={index} className='flex-col list-none items-start'>
             <h1 className='m-0 letter-2'>{item.worksName}</h1>
@@ -69,8 +39,8 @@ const WorksDisplayModelCom: React.FC<WorksDisplayModelComPropsType> = ({ childre
           </WorksDisplayItem>
         ))}
       </ul>
-    </WorksDisplay>
+    </section>
   )
 }
 
-export default WorksDisplayModelCom
+export default WorksDisplayCom1

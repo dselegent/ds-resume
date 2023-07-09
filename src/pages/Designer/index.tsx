@@ -13,8 +13,8 @@ const Designer: React.FC = () => {
   // 简历数据
   const resumeJsonData = useAppSelector(selectorResumeJsonData)
 
-  let id = '1'
-  let name = 'template1'
+  let id = '2'
+  let name = 'template2'
   // 重置数据方法
   const resetStoreAndLocal = async () => {
     let TEMPLATE_JSON

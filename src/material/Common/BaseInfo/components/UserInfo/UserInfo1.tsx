@@ -35,7 +35,7 @@ const Li = styled.li<{
   align-items: center;
   justify-content: center;
   list-style: none;
-  height: 18px;
+  height: 20px;
   padding-right: 24px;
   margin-right: 10px;
 

@@ -22,7 +22,7 @@ const RectangleAvatar: React.FC<RectangleAvatarPropsType> = ({ width = '115px', 
     <RectangleAvatarBox
       width={width}
       height={height}
-      className='f-c-c cursor-pointer overflow-hidden border-3 border-slate-100 rounded border-solid'
+      className='f-c-c cursor-pointer overflow-hidden border-4 border-slate-300 border-solid'
     >
       {modelData?.avatar ? (
         <Image
@@ -30,7 +30,7 @@ const RectangleAvatar: React.FC<RectangleAvatarPropsType> = ({ width = '115px', 
           alt='rectangleAvatar'
           width='100%'
           height='100%'
-          className='rounded object-cover'
+          className='object-cover'
           preview={false}
         />
       ) : (
@@ -39,7 +39,7 @@ const RectangleAvatar: React.FC<RectangleAvatarPropsType> = ({ width = '115px', 
           alt='rectangleAvatar'
           width='100%'
           height='100%'
-          className='rounded object-cover'
+          className='object-cover'
           preview={false}
         />
       )}
